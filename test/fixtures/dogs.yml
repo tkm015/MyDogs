@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dog_breed: one
+  customer: one
+  name: MyString
+  dete_of_birth: MyString
+  sex: false
+  introduction: MyString
+  cover_image: MyString
+  profile_image: MyString
+
+two:
+  dog_breed: two
+  customer: two
+  name: MyString
+  dete_of_birth: MyString
+  sex: false
+  introduction: MyString
+  cover_image: MyString
+  profile_image: MyString
