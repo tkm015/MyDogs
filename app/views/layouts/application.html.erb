@@ -10,6 +10,17 @@
   </head>
 
   <body>
+    <header>
+      <% if public_customer_signed_in? %>
+        <%= render 'layouts/header_customer' %>
+        <div class="header-bottom"></div>
+      <% elsif admin_admin_signed_in? %>
+        <%= render 'layouts/header_admin' %>
+      <% else %>
+        <%= render 'layouts/header_visitor' %>
+        <div class="header-bottom"></div>
+      <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,7 @@
+<!-- ログイン有 -->
+ようこそ、
+    <%= link_to public_customer_path(current_public_customer) do %>
+	    <%= current_public_customer.name %>
+	<% end %>
+さん
+<%= link_to 'ログアウト',destroy_public_customer_session_path, method: :delete  %>
