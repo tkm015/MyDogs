@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :public do
 	  devise_for :customers
+	  root 'customers#top'
+	  resources :customers,onry: [:show, :edit, :update]
   end
 
   namespace :admin do

@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2020_07_25_063816) do
   create_table "comments", force: :cascade do |t|
     t.integer "customer_id"
     t.integer "post_id"
-    t.string "comment"
+    t.string "comment", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_comments_on_customer_id"
@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(version: 2020_07_25_063816) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "name", null: false
+    t.string "cover_image"
+    t.string "profile_image"
+    t.string "date_of_birth", null: false
+    t.string "introduction"
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_customers_on_email", unique: true
@@ -47,7 +53,7 @@ ActiveRecord::Schema.define(version: 2020_07_25_063816) do
   end
 
   create_table "dog_breeds", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -55,10 +61,10 @@ ActiveRecord::Schema.define(version: 2020_07_25_063816) do
   create_table "dogs", force: :cascade do |t|
     t.integer "dog_breed_id"
     t.integer "customer_id"
-    t.string "name"
-    t.string "dete_of_birth"
-    t.boolean "sex"
-    t.string "introduction"
+    t.string "name", null: false
+    t.string "dete_of_birth", null: false
+    t.boolean "sex", null: false
+    t.string "introduction", null: false
     t.string "cover_image"
     t.string "profile_image"
     t.datetime "created_at", null: false
@@ -106,8 +112,8 @@ ActiveRecord::Schema.define(version: 2020_07_25_063816) do
   create_table "posts", force: :cascade do |t|
     t.integer "customer_id"
     t.integer "dog_id"
-    t.string "title"
-    t.text "text"
+    t.string "title", null: false
+    t.text "text", null: false
     t.string "image"
     t.string "video"
     t.datetime "created_at", null: false
@@ -131,7 +137,7 @@ ActiveRecord::Schema.define(version: 2020_07_25_063816) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
