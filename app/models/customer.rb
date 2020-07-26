@@ -4,6 +4,7 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :posts, dependent: :destroy
+  has_many :dogs, dependent: :destroy
   mount_uploader :cover_image, CoverImageUploader
   mount_uploader :profile_image, ProfileImageUploader
 end

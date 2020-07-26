@@ -1,0 +1,13 @@
+<h1>犬種登録</h1>
+<%= form_for @dog_breed, url: admin_dog_breeds_path do |f| %>
+  <%= f.label :name, '犬種' %>
+  <%= f.text_field :name %>
+  <%=f.submit '登録' %>
+<% end %>
+
+<h1>犬種一覧</h1>
+  <% @dog_breeds.each do |dog_breed| %>
+    <%= dog_breed.name %>
+    <%= link_to '削除', admin_dog_breed_path(dog_breed), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+  <% end %>
+

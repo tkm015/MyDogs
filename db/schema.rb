@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2020_07_25_063816) do
     t.integer "dog_breed_id"
     t.integer "customer_id"
     t.string "name", null: false
-    t.date "dete_of_birth", null: false
+    t.date "date_of_birth", null: false
     t.boolean "sex", null: false
     t.string "introduction", null: false
     t.string "cover_image"

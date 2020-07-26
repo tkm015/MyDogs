@@ -1,0 +1,7 @@
+<%= image_tag @dog.profile_image.thumb.url %>
+<%= image_tag @dog.cover_image.thumb.url %>
+<%= @dog.name %>
+<%= @dog.date_of_birth %>
+<%= @dog.introduction %>
+<%= @dog.sex %>
+<%= link_to'編集',edit_public_dog_path(@dog) %>
