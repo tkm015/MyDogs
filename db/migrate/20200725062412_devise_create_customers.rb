@@ -35,7 +35,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[5.2]
       t.string :name, null: false
       t.string :cover_image
       t.string :profile_image
-      t.string :date_of_birth, null: false
+      t.date :date_of_birth, null: false
       t.string :introduction
       t.boolean :is_active, default: true, null: false
 

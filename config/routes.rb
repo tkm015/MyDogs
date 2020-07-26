@@ -3,6 +3,9 @@ Rails.application.routes.draw do
     devise_for :customers
     root 'customers#top'
     resources :customers, onry: [:show, :edit, :update]
+    get '/posts/newimage' => 'posts#newimage', as: "newimage"
+    get '/posts/newvideo' => 'posts#newvideo', as: "newvideo"
+    resources :post, onry: [:index, :show, :edit, :create, :update, :destroy]
   end
 
   namespace :admin do

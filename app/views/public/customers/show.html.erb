@@ -1,0 +1,5 @@
+<%= current_public_customer.name %>さんのマイページ
+プロフィール編集
+<%= image_tag @customer.profile_image.thumb.url %>
+<%= image_tag @customer.cover_image.thumb.url %>
+<%= link_to'編集',edit_public_customer_path(current_public_customer) %>
