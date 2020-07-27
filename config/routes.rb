@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :dogs, onry: [:new, :create, :show, :edit, :update, :destroy]
     get '/posts/newimage' => 'posts#newimage', as: "newimage"
     get '/posts/newvideo' => 'posts#newvideo', as: "newvideo"
-    resources :post, onry: [:index, :show, :edit, :create, :update, :destroy]
+    resources :posts, onry: [:index, :show, :edit, :create, :update, :destroy]
   end
 
   namespace :admin do

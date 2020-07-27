@@ -5,5 +5,4 @@ class Admin::DogBreedsControllerTest < ActionDispatch::IntegrationTest
     get admin_dog_breeds_index_url
     assert_response :success
   end
-
 end

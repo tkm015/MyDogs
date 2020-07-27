@@ -1,2 +1,15 @@
-<h1>Public::Posts#index</h1>
-<p>Find me in app/views/public/posts/index.html.erb</p>
+<h1>すべての投稿</h1>
+ <% @post.each do |post| %>
+ <% if post.image? %>
+   <%= image_tag post.image.thumb.url, alt: '画像'%>
+   <% else %>
+      <%= video_tag post.video.url%>
+   <% end %>
+   <%= image_tag post.dog.cover_image.thumb.url %>
+   <%= link_to public_post_path(post) do %>
+   <%= post.dog.name %>
+   <% end %>
+   <%= post.title %>
+   <%= post.text %>
+   <%= post.updated_at.strftime("%Y-%m-%d %H:%M") %>
+ <% end %>

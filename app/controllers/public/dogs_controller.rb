@@ -21,9 +21,14 @@ class Public::DogsController < ApplicationController
   def update
   end
 
-  def detsroy
+  def destroy
+    dog = Dog.find(params[:id])
+    dog.destroy
+    redirect_to public_customer_path(current_public_customer)
   end
+
   private
+
   def dog_params
     params.require(:dog).permit(:dog_breed_id, :name, :date_of_birth, :sex, :introduction, :cover_image, :profile_image)
   end

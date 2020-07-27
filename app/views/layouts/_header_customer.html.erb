@@ -6,4 +6,7 @@
 	<% end %>
 さん
 <%= link_to 'ログアウト',destroy_public_customer_session_path, method: :delete  %>
+<%= link_to '投稿一覧',public_posts_path%>
+<%= link_to '写真投稿',public_newimage_path%>
+<%= link_to '動画投稿',public_newvideo_path%>
 </nav>

@@ -1,2 +1,11 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<h1>投稿詳細</h1>
+ <% if @post.image? %>
+   <%= image_tag @post.image.url, alt: '画像'%>
+   <% else %>
+      <%= video_tag @post.video.url, controls: true%>
+   <% end %>
+   <%= @post.dog.name %>
+   <%= @post.title %>
+   <%= @post.text %>
+   <%= link_to '削除', public_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }%>
+

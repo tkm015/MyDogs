@@ -30,5 +30,4 @@ class Public::DogsControllerTest < ActionDispatch::IntegrationTest
     get public_dogs_detsroy_url
     assert_response :success
   end
-
 end
