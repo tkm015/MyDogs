@@ -1,0 +1,10 @@
+<!-- いいね表示テンプレート (favorited_by?) => models/post.rbにて定義 -->
+<% if post.favorited_by?(current_public_customer) %>
+  <%= link_to public_post_favorites_path(post), method: :delete do %>
+    <%= post.favorites.count %>いいね
+  <% end %>
+<% else %>
+  <%= link_to public_post_favorites_path(post), method: :post do %>
+    <%= post.favorites.count %>いいね
+  <% end %>
+<% end %>

@@ -8,6 +8,7 @@
    <%= @post.title %>
    <%= @post.text %>
    <%= link_to '削除', public_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }%>
+   <%= render 'public/posts/favorite', post: @post %>
 
    <% @post.comments.each do |comment| %>
      <%= comment.customer.name %>

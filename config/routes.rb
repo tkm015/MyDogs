@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get '/posts/newvideo' => 'posts#newvideo', as: "newvideo"
     resources :posts, only: [:index, :show, :edit, :create, :update, :destroy] do
       resources :comments, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
     end
   end
 
