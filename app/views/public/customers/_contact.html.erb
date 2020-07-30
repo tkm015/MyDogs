@@ -1,0 +1,15 @@
+<% if public_customer_signed_in? %>
+  <% unless customer.id == current_public_customer.id %>
+    <!-- メッセージルームを作成済みか否かで分岐 -->
+    <% if have_room == true %>
+      <%= link_to 'DM参加',public_room_path(room_id) %>
+    <% else %>
+      <%= form_with(model:@room, local: true, url: public_rooms_path) do |f| %>
+        <%= fields_for entry do |e| %>
+          <%= e.hidden_field :customer_id, value: customer.id %>
+          <%= f.submit 'DM開始' %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

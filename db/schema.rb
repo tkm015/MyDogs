@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 2020_07_25_063816) do
   create_table "messages", force: :cascade do |t|
     t.integer "customer_id"
     t.integer "room_id"
+    t.text "message", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_messages_on_customer_id"
