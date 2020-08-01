@@ -6,6 +6,9 @@ class Post < ApplicationRecord
   mount_uploader :image, ImageUploader
   mount_uploader :video, VideoUploader
 
+  # タグ機能
+  acts_as_taggable
+
   # favoriteにログインcustomerが含まれているか判定
   def favorited_by?(customer)
     favorites.where(customer_id: customer.id).exists?

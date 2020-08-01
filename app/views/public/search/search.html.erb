@@ -1,0 +1,10 @@
+<%if @model == 'post' %>
+<P>指定中の検索条件 '投稿' ＞ キーワード <%= @content %> </P>
+<%= render 'public/posts/index', posts: @records %>
+<% elsif @model == 'tag' %>
+<P>指定中の検索条件 'タグ' ＞ キーワード <%= @content %> </P>
+<%= render 'public/posts/index', posts: @records %>
+<% else @model == 'dog' %>
+<P>指定中の検索条件 '犬種' ＞ キーワード <%= @content %> </P>
+<%= render 'public/posts/index', posts: @records %>
+<% end %>

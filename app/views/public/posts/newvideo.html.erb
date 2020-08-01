@@ -4,6 +4,8 @@
  	   <%= f.collection_select :dog_id, @dogs, :id, :name, {prompt: "選択してください"} %>
      <%= f.label :video, '動画' %>
  	   <%= f.file_field :video, :accept => 'video/*' %>
+ 	 <%= f.label :tag_list, 'タグ' %>
+ 	   <%= f.text_field :tag_list, value: @post.tag_list.join(',') %>
  	 <%= f.label :title, 'タイトル' %>
  	   <%= f.text_field :title %>
      <%= f.label :text, '本文' %>
