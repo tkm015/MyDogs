@@ -9,6 +9,7 @@
 <%= link_to '投稿一覧',public_posts_path%>
 <%= link_to '写真投稿',public_newimage_path%>
 <%= link_to '動画投稿',public_newvideo_path%>
+<%= link_to '通知', public_notifications_path %>
 
 <%= form_tag(public_search_path, method: :get) do %>
   <%= select_tag 'search[model]', options_for_select({"投稿" => "post", "タグ" => "tag", "犬種" => "dog" }) %>

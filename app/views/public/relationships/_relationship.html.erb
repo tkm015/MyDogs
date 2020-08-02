@@ -1,0 +1,13 @@
+<% unless dog.customer.id == current_public_customer.id %>
+  <% if following?(current_public_customer.id, dog.id) %>
+    <%= form_for dog, url:public_relationship_path, method: :delete do |f| %>
+    <%= hidden_field_tag :dog_id, dog.id %>
+    <%= f.submit "アンフォロー",data: { confirm: 'フォローを解除しますか？' } %>
+    <% end %>
+  <% else %>
+    <%= form_for dog, url:public_relationships_path, method: :post do |f| %>
+    <%= hidden_field_tag :dog_id, dog.id %>
+    <%= f.submit "フォロー" %>
+    <% end %>
+  <% end %>
+<% end %>

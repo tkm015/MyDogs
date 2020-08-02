@@ -4,5 +4,6 @@
 <%= @dog.date_of_birth %>
 <%= @dog.introduction %>
 <%= @dog.sex %>
+<%= render 'public/relationships/relationship', dog: @dog %>
 <%= link_to'編集',edit_public_dog_path(@dog) %>
 <%= link_to '削除', public_dog_path(@dog), method: :delete, data: { confirm: '本当に削除しますか？' }%>

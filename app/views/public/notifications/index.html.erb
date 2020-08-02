@@ -1,0 +1,6 @@
+<% notifications = @notifications.where.not(visitor_id: current_public_customer.id) %>
+<% if notifications.exists? %>
+	<%= render 'public/notifications/notification' %>
+  <% else %>
+  <P>通知はありません。<P>
+<% end %>
