@@ -1,16 +1,25 @@
 <% visitor = notification.visitor %>
 <% visited = notification.visited %>
+<hr>
+<br>
+visitor: <%= visitor.id %><br> 
+visited: <%= visited.id %><br>
+投稿者id: <%= notification.post.customer_id %><br>
+ログインユーザーid: <%= current_public_customer.id %><br>
+<% if current_public_customer.id == visited.id %>
 <%= link_to "#{visitor.name}",public_customer_path(visitor) %>さんが
 <% case notification.action %>
 	<% when 'favorite' then %>
-	<P>あなたをいいねしました。</P>
+	  <P>あなたの投稿にいいねしました。</P>
 	<% when 'comment' then %>
-	<% if notification.post.customer_id == visited.id %>
-	<%= link_to "あなたの投稿", public_post_path(visited.post.id) %>
-	<% else %>
-	<%= link_to "#{notification.post.customer.name}さんの投稿", public_post_path(visitor.post.id) %>
-	<% end %>
-	にコメントしました
+	  <% if notification.post.customer_id  == current_public_customer.id  %>
+	    <%= link_to "あなたの投稿", public_post_path(notification.post.id) %>
+	  <% else %>
+	    <%= link_to "#{notification.post.customer.name}さんの投稿", public_post_path(notification.post.id) %>
+	  <% end %>
+	  にコメントしました
 	<%= Comment.find_by(id: notification.comment_id)&.comment %>
-	<% end %>
+<% end %>
 	<%= time_ago_in_words(notification.created_at).upcase %>
+<% end %>
+<br>

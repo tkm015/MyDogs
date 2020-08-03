@@ -1,19 +1,34 @@
 <!-- ログイン有 -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-ようこそ、
+ようこそ
     <%= link_to public_customer_path(current_public_customer) do %>
 	    <%= current_public_customer.name %>
 	<% end %>
 さん
-<%= link_to 'ログアウト',destroy_public_customer_session_path, method: :delete  %>
-<%= link_to '投稿一覧',public_posts_path%>
-<%= link_to '写真投稿',public_newimage_path%>
-<%= link_to '動画投稿',public_newvideo_path%>
-<%= link_to '通知', public_notifications_path %>
-
+ <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
+<ul class="navbar-nav">
+<li class="nav-item bd-highlight">
+<%= link_to 'ログアウト',destroy_public_customer_session_path, method: :delete,class: "nav-link text-white btn btn-outline-light"  %>
+</li>
+<li class="nav-item bd-highlight">
+<%= link_to '通知', public_notifications_path, class: "nav-link text-white btn btn-outline-light" %>
+</li>
+<div class="bd-highlight">
 <%= form_tag(public_search_path, method: :get) do %>
   <%= select_tag 'search[model]', options_for_select({"投稿" => "post", "タグ" => "tag", "犬種" => "dog" }) %>
   <%= text_field_tag 'search[content]' %>
   <%= submit_tag "検索" %>
 <% end %>
+</div>
+<li class="nav-item bd-highlight">
+<%= link_to '投稿一覧',public_posts_path, class: "nav-link text-white btn btn-outline-light"%>
+</li>
+<li class="nav-item bd-highlight">
+<%= link_to '写真投稿',public_newimage_path, class: "nav-link text-white btn btn-outline-light"%>
+</li>
+<li class="nav-item bd-highlight">
+<%= link_to '動画投稿',public_newvideo_path, class: "nav-link text-white btn btn-outline-light"%>
+</li>
+</ul>
+</div>
 </nav>
