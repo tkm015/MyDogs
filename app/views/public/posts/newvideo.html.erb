@@ -1,14 +1,46 @@
-<h1>動画投稿</h1>
+<div class="container">
+  <h1>動画投稿</h1>
   <%= form_for @post, url: public_posts_path do |f| %>
- 	 <%= f.label :dog_id, '対象のペット' %>
- 	   <%= f.collection_select :dog_id, @dogs, :id, :name, {prompt: "選択してください"} %>
-     <%= f.label :video, '動画' %>
- 	   <%= f.file_field :video, :accept => 'video/*' %>
- 	 <%= f.label :tag_list, 'タグ' %>
- 	   <%= f.text_field :tag_list, value: @post.tag_list.join(',') %>
- 	 <%= f.label :title, 'タイトル' %>
- 	   <%= f.text_field :title %>
-     <%= f.label :text, '本文' %>
-       <%= f.text_area :text %>
-     <%= f.submit '投稿' %>
- <% end %>
+    <div class="form-group row">
+  	  <div class="col-md-3">
+ 	    <%= f.label :dog_id, '対象のペット' %>
+ 	  </div>
+ 	  <div class="col-md-3">
+ 	    <%= f.collection_select :dog_id, @dogs, :id, :name, {prompt: "選択してください"},class: 'form-control'  %>
+ 	  </div>
+    </div>
+    <div class="form-group row">
+  	  <div class="col-md-3">
+        <%= f.label :video, '動画' %>
+      </div>
+      <div class="col-md-3">
+ 	    <%= f.file_field :video, :accept => 'video/*' %>
+ 	  </div>
+    </div>
+ 	<div class="form-group row">
+  	  <div class="col-md-3">
+ 	    <%= f.label :tag_list, 'タグ' %>
+ 	  </div>
+ 	  <div class="col-md-3">
+ 	    <%= f.text_field :tag_list, value: @post.tag_list.join(','),class: 'form-control'  %>
+ 	  </div>
+    </div>
+ 	<div class="form-group row">
+  	  <div class="col-md-3">
+ 	    <%= f.label :title, 'タイトル' %>
+ 	  </div>
+ 	  <div class="col-md-6">
+ 	    <%= f.text_field :title,class: 'form-control'  %>
+ 	  </div>
+    </div>
+    <div class="form-group row">
+  	  <div class="col-md-3">
+        <%= f.label :text, '本文' %>
+      </div>
+      <div class="col-md-9">
+        <%= f.text_area :text,class: 'form-control'  %>
+      </div>
+    </div>
+    <%= f.submit '投稿',class: 'btn btn-outline-dark'  %>
+  <% end %>
+</div>

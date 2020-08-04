@@ -1,16 +1,33 @@
+<div class="container">
 <h1>すべての投稿</h1>
+<div class="row">
  <% @posts.each do |post| %>
+ <div class="card button m-2 w-23">
  <% if post.image? %>
    <%= image_tag post.image.thumb.url, alt: '画像'%>
    <% else %>
       <%= video_tag post.video.url%>
    <% end %>
+   <div class="card-body ">
    <%= image_tag post.dog.cover_image.thumb.url %>
-   <%= link_to public_post_path(post) do %>
-   <%= post.dog.name %>
+   <% if post.dog.sex == "男の子" %>
+   <%= link_to "#{post.dog.name}",public_dog_path(post) %>くん
+   <% else %>
+   <%= link_to "#{post.dog.name}",public_dog_path(post) %>ちゃん
    <% end %>
-   <%= post.title %>
-   <%= post.text %>
-   <%= render 'public/posts/tag_list', tag_list: post.tag_list %>
+   <div class="card-title text-center">
+      <%= link_to "#{post.title}",public_post_path(post) %>
+   </div>
+   <ul class="list-group list-group-flush">
+      <li class="list-group-item text-center">
+   <%= render 'public/posts/favorite', post: post %>
+</li>
+<li class="list-group-item text-center">
    <%= post.updated_at.strftime("%Y-%m-%d %H:%M") %>
+</li>
+</ul>
+   </div>
+</div>
  <% end %>
+</div>
+</div>

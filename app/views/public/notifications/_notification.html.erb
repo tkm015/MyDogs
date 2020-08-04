@@ -10,7 +10,7 @@ visited: <%= visited.id %><br>
 <%= link_to "#{visitor.name}",public_customer_path(visitor) %>さんが
 <% case notification.action %>
 	<% when 'favorite' then %>
-	  <P>あなたの投稿にいいねしました。</P>
+	  <P><%= link_to "あなたの投稿", public_post_path(notification.post.id) %>にいいねしました。</P>
 	<% when 'comment' then %>
 	  <% if notification.post.customer_id  == current_public_customer.id  %>
 	    <%= link_to "あなたの投稿", public_post_path(notification.post.id) %>
@@ -20,6 +20,6 @@ visited: <%= visited.id %><br>
 	  にコメントしました
 	<%= Comment.find_by(id: notification.comment_id)&.comment %>
 <% end %>
-	<%= time_ago_in_words(notification.created_at).upcase %>
+	<%= notification.created_at.strftime("%Y-%m-%d %H:%M") %>
 <% end %>
 <br>

@@ -1,21 +1,74 @@
-<h1>ペットの登録</h1>
-  <%= form_for @dog, url: public_dogs_path do |f| %>
-    <%= f.label :name, 'ペットの名前' %>
-      <%= f.text_field :name %>
-    <%= f.label :dog_breed_id, '犬種' %>
-    <%= f.collection_select :dog_breed_id, @dog_breeds, :id, :name, {prompt: "選択してください"} %>
-    <%= f.label :date_of_birth, 'ペットの生年月日' %>
-      <%= f.date_select :date_of_birth, use_month_numbers: true,start_year: 1930, end_year: (Time.now.year), default: Date.new(1989, 1, 1) %>
-    <%= f.label :sex, '性別' %>
-      <label><%= f.radio_button :sex, "雄" %>雄</label>
-	  <label><%= f.radio_button :sex, "雌" %>雌</label>
-	<%= f.label :introduction, 'ペットの紹介文' %>
-	  <%= f.text_area :introduction %>
-	<%= f.label :cover_image, 'ペットのカバー写真' %>
-	  <%= f.file_field :cover_image %>
-	<%= f.label :profile_image, 'ペットのプロフィール写真' %>
-	  <%= f.file_field :profile_image %>
-	<%= f.submit '登録' %>
-  <% end %>
+<div class="container">
+  <h1>ペットの登録</h1>
+    <%= form_for @dog, url: public_dogs_path do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+    <div class="form-group row">
+      <div class="col-md-3">
+        <%= f.label :name, 'ペットの名前' %>
+      </div>
+      <div class="col-md-3">
+        <%= f.text_field :name,class: 'form-control'%>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-3">
+        <%= f.label :dog_breed_id, '犬種' %>
+      </div>
+      <div class="col-md-3">
+        <%= f.collection_select :dog_breed_id, @dog_breeds, :id, :name, {prompt: "選択してください"},class: 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-3">
+        <%= f.label :date_of_birth, 'ペットの生年月日' %>
+      </div>
+      <div class="col-md-9">
+        <%= raw sprintf(
+                f.date_select(
+                  :date_of_birth,
+                  use_month_numbers: true,
+                  start_year: 1930,
+                  end_year: (Time.now.year),
+                  default: Date.new(2000, 1, 1),
+                  date_separator: '%s'),
+                '年 ', '月 ') + '日' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-3">
+        <%= f.label :sex, '性別', class: 'form-label' %>
+      </div>
+      <div class="col-md-4 btn-group" data-toggle="buttons">
+        <label class="btn btn-outline-secondary" style="width:50%"><%= f.radio_button :sex, "男の子" %>男の子</label>
+    	  <label class="btn btn-outline-secondary" style="width:50%"><%= f.radio_button :sex, "女の子" %>女の子</label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-3">
+    	  <%= f.label :introduction, 'ペットの紹介文' %>
+      </div>
+      <div class="col-md-9">
+    	  <%= f.text_area :introduction,class: 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-3">
+    	  <%= f.label :cover_image, 'ペットのカバー写真' %>
+      </div>
+      <div class="col-md-9">
+    	  <%= f.file_field :cover_image  %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-3">
+    	  <%= f.label :profile_image, 'ペットのプロフィール写真' %>
+      </div>
+      <div class="col-md-9">
+    	  <%= f.file_field :profile_image %>
+      </div>
+    </div>
+	  <%= f.submit '登録',class: 'btn btn-outline-dark' %>
+    <% end %>
+</div>
 
 

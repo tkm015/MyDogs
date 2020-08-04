@@ -5,6 +5,5 @@ class Public::NotificationsController < ApplicationController
     #@notifications.each do |notification|
     #  notification.update_attributes(checked: true)
     #end
-    @notifications
   end
 end

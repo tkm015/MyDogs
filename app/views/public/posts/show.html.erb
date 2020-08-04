@@ -9,7 +9,7 @@
    <%= @post.text %>
    <%= link_to '削除', public_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }%>
    <%= render 'public/posts/favorite', post: @post %>
-
+   <%= render 'public/posts/tag_list', tag_list: @post.tag_list %>
    <% @post.comments.each do |comment| %>
      <%= comment.customer.name %>
      <%= comment.comment %>

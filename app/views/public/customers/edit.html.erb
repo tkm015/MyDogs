@@ -1,24 +1,64 @@
-<h1>会員情報編集</h1>
-  <%= form_for @customer, url: public_customer_path do |f| %>
-    <%= f.label :name, 'ニックネーム' %>
-    <%= f.text_field :name %>
-    <%= f.label :date_of_birth, '生年月日' %>
-    <%= f.date_select :date_of_birth, use_month_numbers: true,start_year: 1930, end_year: (Time.now.year)%>
-    <%= f.label :introduction, '自己紹介分' %>
-    <%= f.text_area :introduction %>
-    <%= f.label :cover_image, 'カバー画像' %>
-    <% if @customer.cover_image? %>
-      <%= image_tag @customer.cover_image.url %>
-    <% else %>
-      <%= inage_tag "/assets/images/noimage.jpg", :size => '50×50' %>
-    <% end %>
-    <%= f.file_field :cover_image %>
-    <%= f.label :profile_image, 'プロフィール画像' %>
-    <% if @customer.profile_image? %>
-      <%= image_tag @customer.profile_image.url %>
-    <% else %>
-      <%= inage_tag "/assets/images/noimage.jpg", :size => '50×50' %>
-    <% end %>
-    <%= f.file_field :profile_image %>
-    <%= f.submit '変更を保存' %>
-  <% end %>
+<div class="container">
+  <h1>会員情報編集</h1>
+    <%= form_for @customer, url: public_customer_path do |f| %>
+      <div class="form-group row">
+        <div class="col-md-3">
+          <%= f.label :name, 'ニックネーム' %>
+        </div>
+        <div class="col-md-3">
+          <%= f.text_field :name,class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-3">
+          <%= f.label :date_of_birth, '生年月日' %>
+        </div>
+        <div class="col-md-4">
+          <%= raw sprintf(
+                f.date_select(
+                  :date_of_birth,
+                  use_month_numbers: true,
+                  start_year: 1930,
+                  end_year: (Time.now.year),
+                  default: Date.new(2000, 1, 1),
+                  date_separator: '%s'),
+                '年 ', '月 ') + '日' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-3">
+          <%= f.label :introduction, '自己紹介分' %>
+        </div>
+        <div class="col-md-9">
+          <%= f.text_area :introduction,class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-3">
+          <%= f.label :cover_image, 'カバー画像' %>
+        </div>
+        <div class="col-md-3">
+          <% if @customer.cover_image? %>
+            <%= image_tag @customer.cover_image.thumb.url %>
+          <% else %>
+            <%= image_tag "/assets/images/noimage.jpg", :size => '50×50' %>
+          <% end %>
+          <%= f.file_field :cover_image %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-3">
+          <%= f.label :profile_image, 'プロフィール画像' %>
+        </div>
+        <div class="col-md-3">
+          <% if @customer.profile_image? %>
+            <%= image_tag @customer.profile_image.thumb.url %>
+          <% else %>
+            <%= image_tag "/assets/images/noimage.jpg", :size => '50×50' %>
+          <% end %>
+          <%= f.file_field :profile_image %>
+        </div>
+      </div>
+      <%= f.submit '変更を保存',class: 'btn btn-outline-dark' %>
+      <% end %>
+</div>

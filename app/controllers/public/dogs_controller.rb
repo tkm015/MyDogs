@@ -5,10 +5,14 @@ class Public::DogsController < ApplicationController
   end
 
   def create
-    dog = Dog.new(dog_params)
-    dog.customer_id = current_public_customer.id
-    dog.save
-    redirect_to public_dog_path(dog)
+    @dog = Dog.new(dog_params)
+    @dog.customer_id = current_public_customer.id
+    if @dog.save
+      redirect_to public_dog_path(@dog)
+     else
+      @dog_breeds = DogBreed.all
+      render "new"
+    end
   end
 
   def show

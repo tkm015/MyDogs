@@ -20,12 +20,12 @@ class Post < ApplicationRecord
   # いいね通知
   def create_notification_favorite!(current_customer)
     # すでに「いいね」されているか
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and post_id = ? and action = ? ", current_public_customer.id, self.customer_id, id, 'favorite'])
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and post_id = ? and action = ? ", current_customer.id, self.customer_id, self.id, 'favorite'])
     # いいねされていない場合、通知レコードを作成
-    if temp = blank?
-      notification = current_customer.active.notifications.new(
+    if temp.blank?
+      notification = current_customer.active_notifications.new(
         post_id: id,
-        visited_id: customer_id,
+        visited_id: self.customer_id,
         action: 'favorite'
         )
       # 自分の投稿に対する言い値の場合　通知済みに
@@ -36,22 +36,7 @@ class Post < ApplicationRecord
     end
   end
 
-  #コメント通知
-  # def create_notification_comment!(current_customer, comment_id)
-  #       # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
-  #       # temp_ids = Comment.select(:customer_id).where(post_id: id).where.not(customer_id: current_customer.id).distinct
-  #       # temp_ids.each do |temp_id|
-  #       #     save_notification_comment!(current_customer, comment_id, temp_id['customer_id'])
-  #       # end
-  #       # # まだ誰もコメントしていない場合は、投稿者に通知を送る
-  #       # p "=========="
-  #       # p "current_customer_id: #{current_customer.id}"
-  #       # p "customer_id: #{customer_id}"
-  #       # p "self.customer_id: #{self.customer_id}"
-  #       # p "========="
-  #       save_notification_comment!(current_customer, comment_id, self.customer_id)
-  # end
-
+  # コメント通知
   def save_notification_comment!(current_customer, comment_id, visited_id)
         # コメントは複数回することが考えられるため、１つの投稿に複数回通知する
         notification = current_customer.active_notifications.new(
