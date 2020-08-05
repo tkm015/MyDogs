@@ -14,3 +14,30 @@
  *= require_self
  */
 @import "bootstrap";
+
+.cover_image_prev{
+	margin: 0 5px 5px 0;
+    max-width: 200px;
+    vertical-align: bottom;
+}
+
+.profile_image_prev{
+	margin: 0 5px 5px 0;
+    max-width: 200px;
+    vertical-align: bottom;
+}
+
+.top_cover_image{
+	max-width: 100%;
+	height: 300px;
+}
+
+.top_profile_image{
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	border: 4px solid #FFFFFF;
+	position: relative;
+	bottom: 80px;
+
+}

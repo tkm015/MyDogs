@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
     end
     resources :relationships, only: [:create, :destroy]
+    get '/followers' => 'relationships#followers', as: "followers"
+    get '/follows' => 'relationships#follows', as: 'follows'
     resources :notifications, only: :index
     get '/search', to: 'search#search'
   end

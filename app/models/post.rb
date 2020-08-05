@@ -20,14 +20,14 @@ class Post < ApplicationRecord
   # いいね通知
   def create_notification_favorite!(current_customer)
     # すでに「いいね」されているか
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and post_id = ? and action = ? ", current_customer.id, self.customer_id, self.id, 'favorite'])
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and post_id = ? and action = ? ", current_customer.id, customer_id, id, 'favorite'])
     # いいねされていない場合、通知レコードを作成
     if temp.blank?
       notification = current_customer.active_notifications.new(
         post_id: id,
-        visited_id: self.customer_id,
+        visited_id: customer_id,
         action: 'favorite'
-        )
+      )
       # 自分の投稿に対する言い値の場合　通知済みに
       if notification.visitor_id == notification.visited_id
         notification.checked = true
@@ -38,18 +38,18 @@ class Post < ApplicationRecord
 
   # コメント通知
   def save_notification_comment!(current_customer, comment_id, visited_id)
-        # コメントは複数回することが考えられるため、１つの投稿に複数回通知する
-        notification = current_customer.active_notifications.new(
-          post_id: id,
-          comment_id: comment_id,
-          visited_id: visited_id,
-          action: 'comment'
-        )
+    # コメントは複数回することが考えられるため、１つの投稿に複数回通知する
+    notification = current_customer.active_notifications.new(
+      post_id: id,
+      comment_id: comment_id,
+      visited_id: visited_id,
+      action: 'comment'
+    )
 
-        # 自分の投稿に対するコメントの場合は、通知済みとする
-        if notification.visitor_id == notification.visited_id
-          notification.checked = true
-        end
-        notification.save if notification.valid?
+    # 自分の投稿に対するコメントの場合は、通知済みとする
+    if notification.visitor_id == notification.visited_id
+      notification.checked = true
+    end
+    notification.save if notification.valid?
      end
 end
