@@ -1,0 +1,22 @@
+<div class="card mt-5">
+  <div class="card-body">
+    <div class="card-header">
+      <p class="text-center"><i class="fas fa-tags"></i>人気犬ランキング</p>
+    </div>
+    <div class="card-text" >
+      <% dog_ids.each do |dog_id| %>
+        <ul class="list-group list-group-flush">
+          <% @dog = Dog.find(dog_id) %>
+            <li class="list-group-item ">
+              <%= image_tag @dog.cover_image.thumb.url,class: 'side_dogs_cover_image' %>
+                <% if @dog.sex == "男の子" %>
+                  <%= link_to "#{@dog.name}",public_dog_path(@dog) %>くん
+                <% else %>
+                  <%= link_to "#{@dog.name}",public_dog_path(@dog) %>ちゃん
+                <% end %>
+            </li>
+      <% end %>
+        </ul>
+    </div>
+  </div>
+</div>

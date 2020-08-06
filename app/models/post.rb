@@ -12,6 +12,16 @@ class Post < ApplicationRecord
   # タグ機能
   acts_as_taggable
 
+  with_options presence: true do
+    validates :video_or_image
+    validates :title
+    validates :text
+  end
+
+  def video_or_image
+    video.presence or image.presence
+  end
+
   # favoriteにログインcustomerが含まれているか判定
   def favorited_by?(customer)
     favorites.where(customer_id: customer.id).exists?

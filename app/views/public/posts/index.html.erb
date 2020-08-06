@@ -1,5 +1,11 @@
 <div class="container">
-<h1>すべての投稿</h1>
+   <% if @image == "image" %>
+   <h1>投稿一覧＞写真一覧 </h1>
+   <% elsif @video == "video" %>
+   <h1>投稿一覧＞動画一覧 </h1>
+   <% else %>
+   <h1>すべての投稿</h1>
+   <% end %>
 <div class="row">
  <% @posts.each do |post| %>
  <div class="card button m-2 w-23">

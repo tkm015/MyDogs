@@ -1,6 +1,7 @@
 <div class="container">
   <h1>写真投稿</h1>
   <%= form_for @post, url: public_posts_path do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
     <div class="form-group row">
   	  <div class="col-md-3">
  	    <%= f.label :dog_id, '対象のペット' %>

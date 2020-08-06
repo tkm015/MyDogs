@@ -1,0 +1,15 @@
+<!-- サイド　新着投稿一覧 -->
+<div class="card">
+  <div class="card-body">
+    <div class="card-header">
+      <p class="text-center"><i class="fas fa-dog fa-2x"></i>新着投稿</p>
+    </div>
+    <div class="card-text text-center" >
+      <% posts.each do |p| %>
+        <%= link_to public_post_path(p) do %>
+          <%= image_tag p.image.url,class: 'side_new_posts_image' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

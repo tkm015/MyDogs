@@ -1,17 +1,22 @@
 class Public::PostsController < ApplicationController
+  before_action :set_dogs, onlr: [ :newimage, :newvideo, :create]
   def newimage
     @post = Post.new
-    @dogs = current_public_customer.dogs
   end
 
   def newvideo
     @post = Post.new
-    @dogs = current_public_customer.dogs
   end
 
   def index
     if params[:tag_name]
       @posts = Post.tagged_with("#{params[:tag_name]}")
+    elsif params[:image]
+      @image = params[:image]
+      @posts = Post.where(video: nil)
+    elsif params[:video]
+      @video = params[:video]
+      @posts = Post.where(image: nil)
     else
       @posts = Post.all
     end
@@ -28,8 +33,11 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.customer_id = current_public_customer.id
-    @post.save
-    redirect_to public_posts_path
+    if @post.save
+      redirect_to public_posts_path
+    else
+      render 'newimage'
+    end
   end
 
   def update
@@ -42,6 +50,9 @@ class Public::PostsController < ApplicationController
   end
 
   private
+  def set_dogs
+    @dogs = current_public_customer.dogs
+  end
 
   def post_params
     params.require(:post).permit(:dog_id, :title, :text, :image, :video, :tag_list)

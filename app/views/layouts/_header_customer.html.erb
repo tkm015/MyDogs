@@ -14,7 +14,9 @@
 	          <%= link_to 'ログアウト',destroy_public_customer_session_path, method: :delete,class: "nav-link text-dark btn btn-outline-dark"  %>
 	        </li>
 	        <li class="nav-item bd-highlight ">
-	          <%= link_to '通知', public_notifications_path, class: "nav-link text-dark btn btn-outline-dark" %>
+	          <%= link_to public_notifications_path do %>
+	          <i class="fas fa-bell fa-2x"></i>
+	          <% end %>
 	        </li>
 	      </ul>
 	    </div>
@@ -30,6 +32,12 @@
 	    <ul class="navbar-nav mx-auto">
 	      <li class="nav-item bd-highlight mx-5 ">
 	        <%= link_to '投 稿 一 覧',public_posts_path, class: "nav-link text-dark btn btn-outline-dark"%>
+	      </li>
+	      <li class="nav-item bd-highlight mx-5 ">
+	        <%= link_to '写 真 一 覧',public_posts_path(image: "image"), class: "nav-link text-dark btn btn-outline-dark"%>
+	      </li>
+	      <li class="nav-item bd-highlight mx-5 ">
+	        <%= link_to '動 画 一 覧',public_posts_path(video: "video"), class: "nav-link text-dark btn btn-outline-dark"%>
 	      </li>
 	      <li class="nav-item bd-highlight mx-5">
 	        <%= link_to '写 真 投 稿',public_newimage_path, class: "nav-link text-dark btn btn-outline-dark"%>
