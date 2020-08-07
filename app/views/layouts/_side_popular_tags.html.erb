@@ -1,9 +1,7 @@
 <!-- サイド　人気タグ一覧 -->
-<div class="card mt-5">
+<div class="card mt-3">
   <div class="card-body">
-    <div class="card-header">
-      <p class="text-center"><i class="fas fa-tags"></i>人気のタグ</p>
-    </div>
+    <p class="text-center card-header"><i class="fas fa-tags"></i>人気のタグ</p>
     <div class="card-text text-center" >
       <% popular_tags.each do |t| %>
         <%= link_to"#{t.name}", public_posts_path(tag_name: t.name),class: 'btn btn-outline-dark' %>

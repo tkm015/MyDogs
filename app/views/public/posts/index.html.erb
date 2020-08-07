@@ -17,9 +17,9 @@
    <div class="card-body ">
    <%= image_tag post.dog.cover_image.thumb.url %>
    <% if post.dog.sex == "男の子" %>
-   <%= link_to "#{post.dog.name}",public_dog_path(post) %>くん
+   <%= link_to "#{post.dog.name}",public_dog_path(post.dog) %>くん
    <% else %>
-   <%= link_to "#{post.dog.name}",public_dog_path(post) %>ちゃん
+   <%= link_to "#{post.dog.name}",public_dog_path(post.dog) %>ちゃん
    <% end %>
    <div class="card-title text-center">
       <%= link_to "#{post.title}",public_post_path(post) %>

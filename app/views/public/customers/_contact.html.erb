@@ -2,12 +2,12 @@
   <% unless customer.id == current_public_customer.id %>
     <!-- メッセージルームを作成済みか否かで分岐 -->
     <% if have_room == true %>
-      <%= link_to 'DM参加',public_room_path(room_id) %>
+      <%= link_to 'DM再開',public_room_path(room_id), class: 'btn btn-outline-secondary' %>
     <% else %>
       <%= form_with(model:@room, local: true, url: public_rooms_path) do |f| %>
         <%= fields_for entry do |e| %>
           <%= e.hidden_field :customer_id, value: customer.id %>
-          <%= f.submit 'DM開始' %>
+          <%= f.submit 'DM開始', class: 'btn btn-outline-secondary' %>
         <% end %>
       <% end %>
     <% end %>

@@ -1,5 +1,7 @@
 class Public::CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit]
+  before_action :set_side, only: [:top, :show]
+  before_action :follows_new_posts, only: [:show]
   def top
   end
 
@@ -40,6 +42,17 @@ class Public::CustomersController < ApplicationController
   end
 
   private
+  # サイド用データ取得
+  def set_side
+    @new_posts = Post.order(created_at: :desc).limit(9)
+    @popular_tags = Post.tag_counts_on(:tags).order('count DESC').limit(10)
+    @dog_ids = Relationship.group('dog_id').order('count_all DESC').limit(2).count.keys
+  end
+
+  def follows_new_posts
+    follow_dogs = Relationship.where(customer_id: current_public_customer.id).pluck(:dog_id)
+    @follows_new_posts = Post.where(dog_id: follow_dogs).order('created_at DESC').limit(8)
+  end
 
   def set_customer
     @customer = Customer.find(params[:id])
