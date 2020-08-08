@@ -2,12 +2,12 @@
   <% if following?(current_public_customer.id, dog.id) %>
     <%= form_for dog, url:public_relationship_path, method: :delete do |f| %>
     <%= hidden_field_tag :dog_id, dog.id %>
-    <%= f.submit "アンフォロー",data: { confirm: 'フォローを解除しますか？' } %>
+    <%= f.submit "アンフォロー",data: { confirm: 'フォローを解除しますか？' },class: 'btn btn-outline-secondary ' %>
     <% end %>
   <% else %>
     <%= form_for dog, url:public_relationships_path, method: :post do |f| %>
     <%= hidden_field_tag :dog_id, dog.id %>
-    <%= f.submit "フォロー" %>
+    <%= f.submit "フォロー",class: 'btn btn-outline-secondary '%>
     <% end %>
   <% end %>
 <% end %>

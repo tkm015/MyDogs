@@ -1,9 +1,99 @@
-<%= image_tag @dog.profile_image.thumb.url %>
-<%= image_tag @dog.cover_image.thumb.url %>
-<%= @dog.name %>
-<%= @dog.date_of_birth %>
-<%= @dog.introduction %>
-<%= @dog.sex %>
-<%= render 'public/relationships/relationship', dog: @dog %>
-<%= link_to'編集',edit_public_dog_path(@dog) %>
-<%= link_to '削除', public_dog_path(@dog), method: :delete, data: { confirm: '本当に削除しますか？' }%>
+<div class="container">
+  <p><%= @dog.name %>くん</p>
+    <div class="show_head">
+      <%= image_tag @dog.cover_image.cover.url, alt: '画像',class: 'top_cover_image'%>
+      <%= image_tag @dog.profile_image.url, alt: '画像',class: 'top_profile_image'%>
+      <% if @dog.sex == "男の子" %>
+      <p class="top_name"><%= @dog.name %>くん</p>
+      <% else %>
+      <p class="top_name"><%= @dog.name %>ちゃん</p>
+      <% end %>
+      <div class="top_tag_follow">
+      	<%= link_to public_followers_path(dog_id: @dog.id),class: 'btn btn-link' do %>
+        <i class="fas fa-paw">フォロワー<%= @dog.relationships.count %></i>
+        <% end %>
+      </div>
+      <div class="top_tag_edit_or_dm">
+      <% if @dog.customer_id == current_public_customer.id %>
+          <%= link_to edit_public_dog_path(@dog),class: 'btn btn-outline-secondary ' do %>
+            <i class="fas fa-pencil-alt">編集</i>
+          <% end %>
+          <%= link_to public_dog_path(@dog), method: :delete, data: { confirm: '本当に削除しますか？' },class: 'btn btn-outline-secondary ' do %>
+            <i class="fas fa-minus">削除</i>
+          <% end %>
+      <% else %>
+          <%= render 'public/relationships/relationship', dog: @dog %>
+      <% end %>
+      </div>
+    </div>
+  <P class="mt-2">プロフィール</P>
+  <div class="row">
+    <table class="table table-bordered bg-light">
+    	<tbody>
+    		<tr>
+    			<th width="15%">ペット紹介</th>
+    			<th width="85%"><%= @dog.introduction %></th>
+    		</tr>
+    			<th>犬種</th>
+    			<th><%= @dog.dog_breed.name %></th>
+    		</tr>
+    		<tr>
+    			<th>性別</th>
+    			<th><%= @dog.sex %></th>
+    		</tr>
+    		<tr>
+    			<th>年齢</th>
+    			<th><%= @dog.age %>歳</th>
+    		</tr>
+    	</tbody>
+    </table>
+  </div>
+  <% if @dog.sex == "男の子" %>
+  <P class="mt-2"><%= @dog.name %>くんの新着記事</P>
+  <% else %>
+  <P class="mt-2"><%= @dog.name %>ちゃんの新着記事</P>
+  <% end %>
+    <% if @dog_posts.empty? %>
+      <div class="row">
+        <div class="col-md-10 offset-1 bg-white">
+          <p class="text-center">まだ投稿がありません。</p>
+        </div>
+      </div>
+    <% else %>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row ">
+          <% @dog_posts.each do |post| %>
+            <div class="card  col-md-4 mx-auto" >
+              <%= image_tag post.image.thumb.url,class: "card-img-top" %>
+                <div class="card-body">
+                  <p class="card-title">
+                    <% if post.dog.sex == "男の子" %>
+                      <%= link_to "#{post.dog.name}",public_dog_path(post.dog) %>くん
+                    <% else %>
+                      <%= link_to "#{post.dog.name}",public_dog_path(post.dog) %>ちゃん
+                    <% end %>
+                  </p>
+                  <p class="card-text">
+                    <%= render 'public/posts/favorite', post: post %><br>
+                    <%= link_to public_post_path(post) do %>
+                    <%= truncate(post.title, :length =>13) %>
+                    <% end %>
+                  </p>
+                    <%= post.created_at.strftime('%Y/%m/%d %H:%M')%>
+                </div>
+            </div>
+          <% end %>
+        </div>
+    <% end %>
+      </div>
+      <div class="col-md-4">
+        <!-- サイド　新着投稿 -->
+        <%= render 'layouts/side_new_posts', posts: @new_posts %>
+        <!--  サイド　人気犬ランキング -->
+        <%= render 'layouts/side_popular_dogs', dog_ids: @dog_ids %>
+        <!-- サイド　人気タグ一覧-->
+        <%= render 'layouts/side_popular_tags', popular_tags: @popular_tags %>
+      </div>
+    </div>
+</div>

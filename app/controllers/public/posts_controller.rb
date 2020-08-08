@@ -10,15 +10,15 @@ class Public::PostsController < ApplicationController
 
   def index
     if params[:tag_name]
-      @posts = Post.tagged_with("#{params[:tag_name]}")
+      @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page]).order('created_at DESC').per(8)
     elsif params[:image]
       @image = params[:image]
-      @posts = Post.where(video: nil)
+      @posts = Post.where(video: nil).page(params[:page]).order('created_at DESC').per(8)
     elsif params[:video]
       @video = params[:video]
-      @posts = Post.where(image: nil)
+      @posts = Post.where(image: nil).page(params[:page]).order('created_at DESC').per(8)
     else
-      @posts = Post.all
+      @posts = Post.page(params[:page]).order('created_at DESC').per(8)
     end
   end
 

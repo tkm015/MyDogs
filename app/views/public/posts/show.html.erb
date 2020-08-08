@@ -1,25 +1,97 @@
-<h1>投稿詳細</h1>
- <% if @post.image? %>
-   <%= image_tag @post.image.url, alt: '画像'%>
-   <% else %>
-      <%= video_tag @post.video.url, controls: true%>
-  <% end %>
-   <%= @post.dog.name %>
-   <%= @post.title %>
-   <%= @post.text %>
-   <%= link_to '削除', public_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }%>
-   <%= render 'public/posts/favorite', post: @post %>
-   <%= render 'public/posts/tag_list', tag_list: @post.tag_list %>
-   <% @post.comments.each do |comment| %>
-     <%= comment.customer.name %>
-     <%= comment.comment %>
-     <%= comment.created_at.strftime('%Y/%m/%d') %>
-     <%= link_to '削除', public_post_comment_path(@post, comment), method: :delete, data: { confirm: '本当に削除しますか？' }%>
-   <% end %>
+<div class="container ">
+  <h2>記事詳細</h2>
+</div>
+<div class="container ">
+  <div class="post_show_main mx-auto">
+    <div class="row mt-5">
+      <div class="col-md-10 offset-1">
+        <p class="post_show_title mt-2"><%= @post.title %></p>
+      </div>
+      <div class="col-md-9 offset-1 mt-2">
+        <%if @post.dog.sex == "男の子" %>
+          <%= link_to"#{@post.dog.name}", public_dog_path(@post.dog) %>くん
+        <% else %>
+          <%= link_to"#{@post.dog.name}", public_dog_path(@post.dog) %>ちゃん
+        <% end %>
+          <%=@post.dog.dog_breed.name %>
+      </div>
+      <div class="col-md-2">
+        <% if @post.customer_id == current_public_customer.id %>
+          <%= link_to public_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' } ,class: 'btn btn-outline-secondary ' do%>
+            <i class="fas fa-minus">削除</i>
+          <% end %>
+        <% else %>
+          <%= render 'public/relationships/relationship', dog: @post.dog %>
+        <% end %>
+      </div>
+      <div class="col-md-3 offset-1">
+        <%= @post.created_at.strftime('%Y/%m/%d %H:%M') %>
+      </div>
+      <div class="col-md-8">
+        <%= render 'public/posts/favorite', post: @post %>
+      </div>
+      <div class="col-md-10 offset-1">
+        <%= render 'public/posts/tag_list', tag_list: @post.tag_list %>
+      </div>
+      <div class="col-md-12">
+        <%= image_tag @post.dog.cover_image.thumb.url, class: "post_show_cover_image" %>
+      </div>
+      <div class="col-md-12">
+        <% if @post.image? %>
+          <%= image_tag @post.image.show_image.url, alt: '画像', class: 'rounded mx-auto d-block' %>
+        <% else %>
+          <%= video_tag @post.video.url, controls: true, class: 'rounded mx-auto d-block'%>
+        <% end %>
+      </div>
+      <div class="col-md-10 offset-1 mt-5">
+        <%= @post.text %>
+      </div>
+    </div>
+  </div>
+</div>
 
-   <%= form_for [@post, @comment], url: public_post_comments_path(@post) do |f| %>
-     <%= f.label :comment, 'コメント' %>
-     <%= f.text_area :comment %>
-     <%= f.submit 'コメント投稿' %>
-   <% end %>
+<div class="container ">
+  <div class="post_show_comment_form mx-auto mt-2">
+    <%= form_for [@post, @comment], url: public_post_comments_path(@post) do |f| %>
+      <div class="col-md-10 offset-1">
+        <%= f.label :comment do %>
+          <i class="far fa-comment">コメント</i>
+        <% end %>
+      </div>
+     <div class="col-md-10 offset-1">
+       <%= f.text_area :comment,class: 'form-control' %>
+     </div>
+     <div class="col-md-1 offset-9">
+       <%= f.submit 'コメントする',class: 'btn btn-outline-secondary mt-2'  %>
+    <% end %>
+      </div>
+  </div>
 
+  <div class="post_show_comment_index mx-auto">
+    <% unless @post.comments.empty? %>
+      <div class="row mb-5">
+        <% @post.comments.each do |comment| %>
+          <div class="col-md-9 offset-1 mt-2">
+             <%= link_to "#{comment.customer.name}", public_customer_path(comment.customer) %>さん
+          </div>
+          <div class="col-md-2">
+            <%= link_to '削除', public_post_comment_path(@post, comment), method: :delete, data: { confirm: '本当に削除しますか？' },class: 'btn btn-outline-secondary '%>
+          </div>
+          <div class="col-md-11 offset-1">
+            <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+          </div>
+          <div class="col-md-11 offset-1">
+            <%= image_tag comment.customer.cover_image.thumb.url, class: "post_comment_customer_cover_image" %>
+          </div>
+          <div class="col-md-10 offset-1 post_comment_area">
+            <%= comment.comment %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+    <div class="col-md-10 offset-1 mb-5">
+      <p class="text-center">まだコメントがありません</p>
+    </div>
+    <% end %>
+  </div>
+</div>

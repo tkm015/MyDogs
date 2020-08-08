@@ -63,7 +63,7 @@ body{
 	width: 100px;
 }
 
-// ーーーーーーshowページhead部分ーーーーーー
+// ーーーーーーmyページ・dog(show)上部分ーーーーーー
 .show_head{
 	width: 100%;
 	height: 420px;
@@ -104,4 +104,70 @@ body{
 	bottom: 15px;
 	right: 10px;
 }
-// ーーーーーーshowページhead部分ーーーーーー
+// ーーーmyページ・dog(show)上部分ーーー
+
+.created_font_size{
+	font-size: 10px;
+}
+// --いいねハートカラーーー
+.heart_red{
+	color: #FF0000;
+}
+
+.heart_gray{
+	color: #808080;
+}
+// ーーーーーーーーーーーーーー
+
+// indexページカバー画像サイズ
+.index_cover_image{
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	position: relative;
+	bottom: 10px;
+}
+// ーーー投稿showページレイアウトーーー
+.post_show_main{
+	background-color: #FFFFFF;
+	height: 100%;
+	width: 75%;
+}
+
+.post_show_title{
+	font-size: 20px;
+}
+
+.post_show_cover_image{
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+	border:5px solid #FFFFFF;
+	position: relative;
+	bottom: 85px;
+	right: 20px;
+}
+
+.post_show_comment_form{
+	width: 75%;
+	background-color: #FFCC99;
+}
+
+.post_show_comment_index{
+	width: 75%;
+	background-color: #FFFFFF;
+}
+
+.post_comment_customer_cover_image{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	position: relative;
+	bottom: 45px;
+	right: 50px;
+}
+
+.post_comment_area{
+	border-bottom: 2px dotted #FFCC99;
+}
+// ーーーーーーーーーーーーーーーーーーーーー

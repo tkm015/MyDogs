@@ -8,32 +8,32 @@
    <% end %>
 <div class="row">
  <% @posts.each do |post| %>
- <div class="card button m-2 w-23">
+ <div class="card  col-md-3 mx-auto" >
  <% if post.image? %>
-   <%= image_tag post.image.thumb.url, alt: '画像'%>
+   <%= image_tag post.image.thumb.url, alt: '画像',class: "card-img-top" %>
    <% else %>
-      <%= video_tag post.video.url%>
+      <%= video_tag post.video.url,class: "card-img-top" %>
    <% end %>
    <div class="card-body ">
-   <%= image_tag post.dog.cover_image.thumb.url %>
+      <p class="card-title">
+   <%= image_tag post.dog.cover_image.thumb.url, class: 'index_cover_image' %>
    <% if post.dog.sex == "男の子" %>
    <%= link_to "#{post.dog.name}",public_dog_path(post.dog) %>くん
    <% else %>
    <%= link_to "#{post.dog.name}",public_dog_path(post.dog) %>ちゃん
    <% end %>
-   <div class="card-title text-center">
-      <%= link_to "#{post.title}",public_post_path(post) %>
-   </div>
-   <ul class="list-group list-group-flush">
-      <li class="list-group-item text-center">
-   <%= render 'public/posts/favorite', post: post %>
-</li>
-<li class="list-group-item text-center">
+</p>
+<p class="card-text">
+      <%= render 'public/posts/favorite', post: post %><br>
+                    <%= link_to public_post_path(post) do %>
+                    <%= truncate(post.title, :length =>13) %>
+                    <% end %>
+                       </p>
    <%= post.updated_at.strftime("%Y-%m-%d %H:%M") %>
-</li>
-</ul>
-   </div>
+
+</div>
 </div>
  <% end %>
+ <%= paginate @posts %>
 </div>
 </div>
