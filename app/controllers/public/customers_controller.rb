@@ -3,10 +3,13 @@ class Public::CustomersController < ApplicationController
   before_action :set_side, only: [:top, :show]
   before_action :follows_new_posts, only: [:show]
   def top
+    dog = @dog_ids.first
+    @dog = Dog.find(dog)
+    @post = Post.order('created_at DESC').limit(9)
   end
 
   def show
-    @dog = current_public_customer.dogs
+    @dog = current_public_customer.dogs.page(params[:page]).order('created_at DESC').per(6)
     if public_customer_signed_in?
       # cureent_customerがルームに参加しているか確認
       @current_public_customer_entry = Entry.where(customer_id: current_public_customer.id)
@@ -44,9 +47,9 @@ class Public::CustomersController < ApplicationController
   private
   # サイド用データ取得
   def set_side
-    @new_posts = Post.order(created_at: :desc).limit(9)
+    @new_posts = Post.order('created_at DESC').limit(9)
     @popular_tags = Post.tag_counts_on(:tags).order('count DESC').limit(10)
-    @dog_ids = Relationship.group('dog_id').order('count_all DESC').limit(2).count.keys
+    @dog_ids = Relationship.group('dog_id').order('count_all DESC').limit(5).count.keys
   end
 
   def follows_new_posts

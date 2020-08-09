@@ -33,6 +33,11 @@ class ProfileImageUploader < CarrierWave::Uploader::Base
   version :thumb do
     process resize_to_fill: [80, 80, "Center"]
   end
+  
+  version :top do
+    process resize_to_fill: [300, 300, "Center"]
+  end
+
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

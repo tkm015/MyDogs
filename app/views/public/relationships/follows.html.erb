@@ -1,0 +1,40 @@
+<div class="container mt-3">
+    <h2><%= @customer.name %>さんのフォロー一覧</h2>
+  <div class="row">
+    <div class="col-md-7 offset-1">
+      <% @dogs.each do |c| %>
+        <div class="card mb-3" style="max-width: 600px;">
+      	  <div class="row">
+            <div class="col-md-1">
+            	<%= image_tag c.cover_image.thumb.url,class: 'list_cover_image'%>
+            </div>
+            <div class="col-md-11">
+            	<div class="card-body">
+            		<div class="card-title">
+                  <% if c.sex == "男の子" %>
+                	<%= link_to"#{c.name}", public_dog_path(c) %>くん
+                  <% else %>
+                  <%= link_to"#{c.name}", public_dog_path(c) %>ちゃん
+                  <% end %>
+                </div>
+                <div class="card-text">
+                	<%= truncate(c.introduction, :length =>33)%><br>
+                  <%= c.sex %> / <%= c.age %>歳 / <%= c.dog_breed.name %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <%= paginate @dogs %>
+    </div>
+    <div class="col-md-4">
+    <!-- サイド　新着投稿 -->
+      <%= render 'layouts/side_new_posts', posts: @new_posts %>
+    <!--  サイド　人気犬ランキング -->
+      <%= render 'layouts/side_popular_dogs', dog_ids: @dog_ids %>
+    <!-- サイド　人気タグ一覧-->
+      <%= render 'layouts/side_popular_tags', popular_tags: @popular_tags %>
+    </div>
+  </div>
+</div>

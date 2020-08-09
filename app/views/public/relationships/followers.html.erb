@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container mt-3">
   <% if @dog.sex == "男の子" %>
-    <h1><%= @dog.name %>くんのフォロワー</h1>
+    <h2><%= @dog.name %>くんのフォロワー</h2>
   <% else %>
-    <h1><%= @dog.name %>ちゃんのフォロワー</h1>
+    <h2><%= @dog.name %>ちゃんのフォロワー</h2>
   <% end %>
   <div class="row">
     <div class="col-md-7 offset-1">
@@ -15,7 +15,7 @@
             <div class="col-md-11">
             	<div class="card-body">
             		<div class="card-title">
-                	<%= c.name %>さん
+                	<%= link_to"#{c.name}", public_customer_path(c) %>さん
                 </div>
                 <div class="card-text">
                 	<%= truncate(c.introduction, :length =>33)%>
@@ -25,6 +25,7 @@
           </div>
         </div>
       <% end %>
+      <%= paginate @customers %>
     </div>
     <div class="col-md-4">
     <!-- サイド　新着投稿 -->

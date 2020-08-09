@@ -26,10 +26,17 @@ class Public::RelationshipsController < ApplicationController
     followers.each do |f|
       customer_ids.push(f.customer_id)
     end
-    @customers = Customer.find(customer_ids)
+    @customers = Kaminari.paginate_array(Customer.find(customer_ids)).page(params[:page]).per(8)
   end
 
   def follows
+    @customer = Customer.find(params[:customer_id])
+    follows = @customer.relationships.where(customer_id: @customer.id)
+    dog_ids = []
+    follows.each do |f|
+      dog_ids.push(f.dog_id)
+    end
+    @dogs = Kaminari.paginate_array(Dog.find(dog_ids)).page(params[:page]).per(1)
   end
 
   private

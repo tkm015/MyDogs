@@ -1,51 +1,58 @@
 <!-- ログイン有 -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light displaycol">
+<nav class="navbar navbar-expand-lg navbar-light  displaycol">
   <div class="container">
 	<h1>MyDogs</h1>
-	  <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
-	  	<div class="ml-auto">
-	 	  <ul class="navbar-nav">
-	 	    <li class="mx-5">ようこそ
-	          <%= link_to public_customer_path(current_public_customer) do %>
-		      <%= current_public_customer.name %>
-		      <% end %>さん
-	        </li>
-	        <li class="nav-item bd-highlight mx-5">
-	          <%= link_to 'ログアウト',destroy_public_customer_session_path, method: :delete,class: "nav-link text-dark btn btn-outline-dark"  %>
-	        </li>
-	        <li class="nav-item bd-highlight ">
-	          <%= link_to public_notifications_path do %>
-	          <i class="fas fa-bell fa-2x"></i>
-	          <% end %>
-	        </li>
-	      </ul>
-	    </div>
-	    <div class="ml-auto">
-	      <%= form_tag(public_search_path, method: :get) do %>
-	      <div class="form-group form-inline">
-	        <%= select_tag 'search[model]', options_for_select({"投稿" => "post", "タグ" => "tag", "犬種" => "dog" }),class: 'form-control' %>
-	        <%= text_field_tag 'search[content]','', class: 'form-control'%>
-	        <%= submit_tag "検索", class: 'btn btn-light' %>
-	      <% end %>
+      <div class="row">
+	  	<div class="col-md-6 offset-2">
+	 	  <p>ようこそ<%= link_to"#{current_public_customer.name}", public_customer_path(current_public_customer) %>さん</p>
+		</div>
+        <div class="col-md-2 text-right">
+          <div class="dropdown">
+        	<button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-bars">menu</i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to 'ログアウト',destroy_public_customer_session_path, method: :delete,class: "dropdown-item"  %>
+              <%= link_to 'マイページ',public_customer_path(current_public_customer),class: "dropdown-item"%>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1 text-right">
+          <%= link_to public_notifications_path do %>
+            <i class="far fa-bell fa-lg"></i>
+          <% end %>
+        </div>
+
+	    <div class="col-md-5 offset-7 ">
+	      <div class="form-group form-inline ">
+	        <%= form_tag(public_search_path, method: :get) do %>
+	          <%= select_tag 'search[model]', options_for_select({"投稿" => "post", "タグ" => "tag", "犬種" => "dog" }),class: 'form-control' %>
+	          <%= text_field_tag 'search[content]','', class: 'form-control'%>
+	          <%= submit_tag "検索", class: 'btn btn-outline-dark' %>
+	        <% end %>
 	      </div>
 	    </div>
-	    <ul class="navbar-nav mx-auto">
-	      <li class="nav-item bd-highlight mx-5 ">
-	        <%= link_to '投 稿 一 覧',public_posts_path, class: "nav-link text-dark btn btn-outline-dark"%>
-	      </li>
-	      <li class="nav-item bd-highlight mx-5 ">
-	        <%= link_to '写 真 一 覧',public_posts_path(image: "image"), class: "nav-link text-dark btn btn-outline-dark"%>
-	      </li>
-	      <li class="nav-item bd-highlight mx-5 ">
-	        <%= link_to '動 画 一 覧',public_posts_path(video: "video"), class: "nav-link text-dark btn btn-outline-dark"%>
-	      </li>
-	      <li class="nav-item bd-highlight mx-5">
-	        <%= link_to '写 真 投 稿',public_newimage_path, class: "nav-link text-dark btn btn-outline-dark"%>
-	      </li>
-	      <li class="nav-item bd-highlight mx-5">
-	        <%= link_to '動 画 投 稿',public_newvideo_path, class: "nav-link text-dark btn btn-outline-dark"%>
-	      </li>
-	    </ul>
+
+        <div class="col-md-3 ">
+          <%= link_to '投 稿 一 覧',public_posts_path, class: "nav-link text-dark btn btn-outline-dark btn-block"%>
+        </div>
+        <div class="col-md-3 ">
+          <%= link_to '写 真 一 覧',public_posts_path(image: "image"), class: "nav-link text-dark btn btn-outline-dark btn-block"%>
+        </div>
+        <div class="col-md-3 ">
+          <%= link_to '動 画 一 覧',public_posts_path(video: "video"), class: "nav-link text-dark btn btn-outline-dark btn-block"%>
+        </div>
+        <div class="col-md-1 offset-1 ">
+      	  <div class="dropdown">
+      		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              投稿
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to '動画投稿',public_newvideo_path, class: "dropdown-item"%>
+              <%= link_to '写真投稿',public_newimage_path, class: "dropdown-item"%>
+            </div>
+	      </div>
+	    </div>
 	  </div>
-  </div>
+	</div>
 </nav>

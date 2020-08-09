@@ -1,0 +1,58 @@
+<div class="container-fluid">
+   <div class="top_back_image">
+   	  <h1><i class="fas fa-crown"></i>Most popular dog<i class="fas fa-crown"></i></h1>
+   	    <%= link_to public_dog_path(@dog) do %>
+          <%= image_tag @dog.profile_image.top.url,class: 'top_popular_dog_image' %>
+        <% end %>
+        <p><%= link_to "#{@dog.customer.name}", public_customer_path(@dog.customer) %>さんの</p>
+        <% if @dog.sex == "男の子" %>
+          <h2><%= link_to "#{@dog.name}", public_dog_path(@dog) %>くん<h2>
+        <% else %>
+          <h2><%= link_to "#{@dog.name}", public_dog_path(@dog) %>ちゃん</h2>
+        <% end %>
+    </div>
+</div>
+
+<div class="container mt-4">
+  <div class="row">
+      <div class="col-md-8 mt-3">
+      	<h3 class="text-center"><i class="fas fa-dog fa-lg"></i> 新 着 記 事 </h3>
+    <% if @post.present? %>
+      <div class="row ">
+          <% @post.each do |post| %>
+            <div class="card  col-md-4 mx-auto" >
+              <%= image_tag post.image.thumb.url,class: "card-img-top" %>
+                <div class="card-body">
+                  <p class="card-title">
+                    <% if post.dog.sex == "男の子" %>
+                      <%= link_to "#{post.dog.name}",public_dog_path(post.dog) %>くん
+                    <% else %>
+                      <%= link_to "#{post.dog.name}",public_dog_path(post.dog) %>ちゃん
+                    <% end %>
+                  </p>
+                  <p class="card-text">
+                    <%= render 'public/posts/favorite', post: post %><br>
+                    <%= link_to public_post_path(post) do %>
+                    <%= truncate(post.title, :length =>13) %>
+                    <% end %>
+                  </p>
+                    <%= post.created_at.strftime('%Y/%m/%d %H:%M')%>
+                </div>
+            </div>
+          <% end %>
+          <%= link_to '記事をもっと見る。', public_posts_path, class: 'mx-auto mt-2 btn btn-outline-secondary' %>
+        </div>
+    <% else %>
+      <p class="text-center bg-white">まだ投稿がありません。</p>
+    <% end %>
+      </div>
+      <div class="col-md-4">
+        <!-- サイド　新着投稿 -->
+        <%= render 'layouts/side_new_posts', posts: @new_posts %>
+        <!--  サイド　人気犬ランキング -->
+        <%= render 'layouts/side_popular_dogs', dog_ids: @dog_ids %>
+        <!-- サイド　人気タグ一覧-->
+        <%= render 'layouts/side_popular_tags', popular_tags: @popular_tags %>
+      </div>
+    </div>
+</div>

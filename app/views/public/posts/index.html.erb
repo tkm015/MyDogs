@@ -1,10 +1,10 @@
-<div class="container">
+<div class="container mt-3">
    <% if @image == "image" %>
-   <h1>投稿一覧＞写真一覧 </h1>
+   <h2>投稿一覧>>写真一覧 </h2>
    <% elsif @video == "video" %>
-   <h1>投稿一覧＞動画一覧 </h1>
+   <h2>投稿一覧>>動画一覧 </h2>
    <% else %>
-   <h1>すべての投稿</h1>
+   <h2>すべての投稿</h2>
    <% end %>
 <div class="row">
  <% @posts.each do |post| %>
@@ -34,6 +34,11 @@
 </div>
 </div>
  <% end %>
- <%= paginate @posts %>
 </div>
+<div class="row">
+<div class="mx-auto mt-3">
+<%= paginate @posts %>
+</div>
+</div>
+
 </div>

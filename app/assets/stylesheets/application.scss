@@ -16,7 +16,7 @@
 @import "bootstrap";
 
 body{
-	background-color: #FFF5EE;
+	background-color: #FFFFDD;
 }
 
 // カバー画像プレビュー表示サイズ
@@ -171,3 +171,40 @@ body{
 	border-bottom: 2px dotted #FFCC99;
 }
 // ーーーーーーーーーーーーーーーーーーーーー
+
+// ---kaminariレイアウト---
+.pagination>li>a {
+  border: none;
+  color: #696969;
+}
+/* 表示しているページ番号のデザイン */
+.pagination>.active>a {
+  background: #93c9ff;
+  border-radius: 15px;
+}
+
+/*ホバー時のデザイン*/
+.pagination>li>a:hover {
+  border-radius: 15px;
+}
+// ------------------------
+// ---Topページレイアウトーーー
+.top_popular_dog_image{
+	height: 300px;
+	width: 300px;
+	border-radius: 50%;
+}
+
+.top_back_image{
+	margin: 0 auto;
+	height: 500px;
+	width: 100%;
+	background-image: url('top.jpg');
+	background-position: center;
+	background-size: cover;
+	text-align: center;
+}
+// ーーーーーーーーーーーーーーー
+nav{
+    background-color: #E4FF8D;
+}

@@ -53,16 +53,10 @@
   <% else %>
   <P class="mt-2"><%= @dog.name %>ちゃんの新着記事</P>
   <% end %>
-    <% if @dog_posts.empty? %>
-      <div class="row">
-        <div class="col-md-10 offset-1 bg-white">
-          <p class="text-center">まだ投稿がありません。</p>
-        </div>
-      </div>
-    <% else %>
-    <div class="row">
+  <div class="row">
       <div class="col-md-8">
-        <div class="row ">
+    <% if @dog_posts.present? %>
+      <div class="row ">
           <% @dog_posts.each do |post| %>
             <div class="card  col-md-4 mx-auto" >
               <%= image_tag post.image.thumb.url,class: "card-img-top" %>
@@ -85,6 +79,8 @@
             </div>
           <% end %>
         </div>
+    <% else %>
+      <p class="text-center bg-white">まだ投稿がありません。</p>
     <% end %>
       </div>
       <div class="col-md-4">

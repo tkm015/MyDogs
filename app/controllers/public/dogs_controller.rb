@@ -48,7 +48,7 @@ class Public::DogsController < ApplicationController
 
   # サイド用データ取得
   def set_side
-    @new_posts = Post.order(created_at: :desc).limit(9)
+    @new_posts = Post.order('created_at DESC').limit(9)
     @popular_tags = Post.tag_counts_on(:tags).order('count DESC').limit(10)
     @dog_ids = Relationship.group('dog_id').order('count_all DESC').limit(2).count.keys
   end
