@@ -1,0 +1,57 @@
+<% if messages.present? %>
+    <div class="post_show_comment_index mx-auto" >
+      <p class="ml-5 pt-2">全<%= messages.count%>件のメッセージ</p>
+      <a class="btn btn-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">全てのメッセージを表示
+  　  </a>
+      <div class="row">
+        <% messages.first(7).each do |m| %>
+          <div class="col-md-9 offset-1 mt-2">
+            <%= link_to "#{m.customer.name}", public_customer_path(m.customer) %>さん
+          </div>
+          <div class="col-md-2">
+            <% if m.customer == current_public_customer %>
+              <%= form_with(model: message, url: public_message_path(m), remote: true, method: :delete) do |f| %>
+                <%= f.hidden_field :room_id, value: room.id %>
+                <%= f.submit '削除',data: { confirm: "本当に削除しますか？"},class: 'btn btn-outline-secondary ' %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="col-md-11 offset-1">
+            <%= m.created_at.strftime("%Y-%m-%d %H:%M") %>
+          </div>
+          <div class="col-md-10 offset-1 post_comment_area">
+            <%= m.message %>
+          </div>
+          <div class="col-md-11 offset-1">
+            <%= image_tag m.customer.cover_image.thumb.url, class: "room_comment_customer_cover_image" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="collapse" id="collapseExample">
+        <div class="row">
+          <% messages.offset(7).each do |m| %>
+            <div class="col-md-9 offset-1 mt-2">
+              <%= link_to "#{m.customer.name}", public_customer_path(m.customer) %>さん
+            </div>
+            <div class="col-md-2">
+              <% if m.customer == current_public_customer %>
+                <%= form_with(model: message, url: public_message_path(m), remote: true, method: :delete) do |f| %>
+                  <%= f.hidden_field :room_id, value: room.id %>
+                  <%= f.submit '削除',data: { confirm: "本当に削除しますか？"},class: 'btn btn-outline-secondary ' %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="col-md-11 offset-1">
+              <%= m.created_at.strftime("%Y-%m-%d %H:%M") %>
+            </div>
+            <div class="col-md-10 offset-1 post_comment_area">
+              <%= m.message %>
+            </div>
+            <div class="col-md-11 offset-1">
+              <%= image_tag m.customer.cover_image.thumb.url, class: "room_comment_customer_cover_image" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>

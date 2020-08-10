@@ -1,0 +1,51 @@
+<div class="post_show_comment_index mx-auto" >
+  <p class="ml-5 pt-2">全<%= comments.count%>件のコメント</p>
+    <% unless comments.empty? %>
+      <a class="btn btn-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">全てのコメントを表示
+  　  </a>
+        <div class="row">
+          <% comments.first(5).each do |comment| %>
+            <div class="col-md-9 offset-1 mt-2">
+               <%= link_to "#{comment.customer.name}", public_customer_path(comment.customer) %>さん
+            </div>
+            <div class="col-md-2">
+              <%= link_to '削除', public_post_comment_path(@post, comment), method: :delete, remote: true, data: { confirm: '本当に削除しますか？' },class: 'btn btn-outline-secondary '%>
+            </div>
+            <div class="col-md-11 offset-1">
+              <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+            </div>
+            <div class="col-md-11 offset-1">
+              <%= image_tag comment.customer.cover_image.thumb.url, class: "post_comment_customer_cover_image" %>
+            </div>
+            <div class="col-md-10 offset-1 post_comment_area">
+              <%= comment.comment %>
+            </div>
+          <% end %>
+        </div>
+        <div class="collapse" id="collapseExample">
+          <div class="row mb-5">
+            <% comments.offset(5).each do |comment| %>
+              <div class="col-md-9 offset-1 mt-2">
+                 <%= link_to "#{comment.customer.name}", public_customer_path(comment.customer) %>さん
+              </div>
+              <div class="col-md-2">
+                <%= link_to '削除', public_post_comment_path(@post, comment), method: :delete, remote: true, data: { confirm: '本当に削除しますか？' },class: 'btn btn-outline-secondary '%>
+              </div>
+              <div class="col-md-11 offset-1">
+                <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+              </div>
+              <div class="col-md-11 offset-1">
+                <%= image_tag comment.customer.cover_image.thumb.url, class: "post_comment_customer_cover_image" %>
+              </div>
+              <div class="col-md-10 offset-1 post_comment_area">
+                <%= comment.comment %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+    <% else %>
+      <div class="col-md-10 offset-1 mb-5">
+        <p class="text-center">まだコメントがありません</p>
+      </div>
+    <% end %>
+</div>

@@ -32,17 +32,27 @@
 	        <% end %>
 	      </div>
 	    </div>
-
-        <div class="col-md-3 ">
-          <%= link_to '投 稿 一 覧',public_posts_path, class: "nav-link text-dark btn btn-outline-dark btn-block"%>
+        <div class="col-md-2 ">
+          <%= link_to public_root_path, class: "nav-link text-dark btn btn-outline-dark btn-block" do%>
+            <i class="fas fa-home">H O M E</i>
+          <% end %>
         </div>
-        <div class="col-md-3 ">
-          <%= link_to '写 真 一 覧',public_posts_path(image: "image"), class: "nav-link text-dark btn btn-outline-dark btn-block"%>
+        <div class="col-md-2 ">
+          <%= link_to public_posts_path, class: "nav-link text-dark btn btn-outline-dark btn-block" do%>
+            <i class="fas fa-paw">投 稿 一 覧</i>
+          <% end %>
         </div>
-        <div class="col-md-3 ">
-          <%= link_to '動 画 一 覧',public_posts_path(video: "video"), class: "nav-link text-dark btn btn-outline-dark btn-block"%>
+        <div class="col-md-2 ">
+          <%= link_to public_posts_path(image: "image"), class: "nav-link text-dark btn btn-outline-dark btn-block" do%>
+            <i class="fas fa-camera">写 真 一 覧</i>
+          <% end %>
         </div>
-        <div class="col-md-1 offset-1 ">
+        <div class="col-md-2 ">
+          <%= link_to public_posts_path(video: "video"), class: "nav-link text-dark btn btn-outline-dark btn-block" do%>
+            <i class="fas fa-play-circle">動 画 一 覧</i>
+          <% end %>
+        </div>
+        <div class="col-md-1 offset-1">
       	  <div class="dropdown">
       		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               投稿

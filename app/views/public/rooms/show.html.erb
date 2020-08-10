@@ -1,25 +1,29 @@
-<% @entries.each do |e| %>
-  <%= e.customer.name %>さん
-<% end %>
-
-<% if @messages.present? %>
-  <% @messages.each do |m| %>
-    <%= m.customer.name %>
-    <%= m.message %>
-    <%= m.created_at.strftime("%Y-%m-%d %H:%M") %>
-    <% if m.customer == current_public_customer %>
-      <%= form_with(model: @message, url: public_message_path(m), remote: true, method: :delete) do |f| %>
-        <%= f.hidden_field :room_id, value: @room.id %>
-        <%= f.submit '削除',data: { confirm: "本当に削除しますか？"} %>
-      <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <% @entries.each do |e| %>
+        <%= link_to "#{e.customer.name}", public_customer_path(e.customer) %>さん
+      <% end %>のトークルーム
+    </div>
+  </div>
+  <div id="message_area">
+    <%= render 'public/messages/message_index', room: @room, messages: @messages, message: @message %>
+  </div>
+  
+  <div class="post_show_comment_form mx-auto mt-2 mb-5">
+    <%= form_for @message, url: public_messages_path(@room), remote: true do |f| %>
+      <div class="col-md-10 offset-1 pt-2">
+        <%= f.label :message do%>
+          <i class="far fa-comment">メッセージ</i>
+        <% end %>
+      </div>
+      <div class="col-md-10 offset-1">
+        <%= f.text_area :message, class: 'form-control' %>
+      </div>
+      <%= f.hidden_field :room_id, value: @room.id %>
+      <div class="col-md-1 offset-9 pb-2">
+        <%= f.submit '送信',class: 'btn btn-outline-secondary mt-2' %>
+      </div>
     <% end %>
-  <% end %>
-<% end %>
-
-<%= form_for @message, url: public_messages_path(@room) do |f| %>
-  <%= f.label :message, 'メッセージ' %>
-  <%= f.text_area :message %>
-  <%= f.hidden_field :room_id, value: @room.id %>
-  <%= f.submit '送信' %>
-<% end %>
-
+  </div>
+</div>

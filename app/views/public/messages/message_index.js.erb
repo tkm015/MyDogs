@@ -1,0 +1,2 @@
+$("#message_area").html("<%= j(render 'public/messages/message_index', room: @room, message: @message, messages: @messages ) %>")
+$("textarea").val('')

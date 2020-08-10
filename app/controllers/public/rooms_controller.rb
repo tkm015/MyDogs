@@ -19,7 +19,7 @@ class Public::RoomsController < ApplicationController
     # Entriesテーブルに情報があるか確認
     if Entry.where(customer_id: current_public_customer.id, room_id: @room.id).present?
       # @roomの全てのメッセージ、エントリーcustomerを取得　新規メッセージを定義
-      @messages = @room.messages.includes(:customer).order("created_at asc")
+      @messages = @room.messages.includes(:customer).order("created_at DESC")
       @message = Message.new
       @entries = @room.entries
     else

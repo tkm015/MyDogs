@@ -84,3 +84,5 @@ gem 'carrierwave'
 gem 'mini_magick'
 
 gem 'acts-as-taggable-on', '~> 6.0'
+
+gem 'streamio-ffmpeg'

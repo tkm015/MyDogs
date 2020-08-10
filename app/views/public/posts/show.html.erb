@@ -27,7 +27,7 @@
       <div class="col-md-3 offset-1">
         <%= @post.created_at.strftime('%Y/%m/%d %H:%M') %>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-8" id="favorite-<%= @post.id %>">
         <%= render 'public/posts/favorite', post: @post %>
       </div>
       <div class="col-md-10 offset-1">
@@ -40,7 +40,7 @@
         <% if @post.image? %>
           <%= image_tag @post.image.show_image.url, alt: '画像', class: 'rounded mx-auto d-block' %>
         <% else %>
-          <%= video_tag @post.video.url, controls: true, class: 'rounded mx-auto d-block'%>
+          <%= video_tag @post.video_url(:size).to_s, controls: true, class: 'rounded mx-auto d-block'%>
         <% end %>
       </div>
       <div class="col-md-10 offset-1 mt-5">
@@ -52,46 +52,21 @@
 
 <div class="container ">
   <div class="post_show_comment_form mx-auto mt-2">
-    <%= form_for [@post, @comment], url: public_post_comments_path(@post) do |f| %>
+    <%= form_with(model: [@post, @comment], url: public_post_comments_path(@post) ) do |f| %>
       <div class="col-md-10 offset-1">
         <%= f.label :comment do %>
           <i class="far fa-comment">コメント</i>
         <% end %>
       </div>
-     <div class="col-md-10 offset-1">
-       <%= f.text_area :comment,class: 'form-control' %>
-     </div>
-     <div class="col-md-1 offset-9">
-       <%= f.submit 'コメントする',class: 'btn btn-outline-secondary mt-2'  %>
+      <div class="col-md-10 offset-1">
+        <%= f.text_area :comment,class: 'form-control' %>
+      </div>
+      <div class="col-md-1 offset-9 pb-2">
+        <%= f.submit 'コメント',class: 'btn btn-outline-secondary mt-2'  %>
     <% end %>
       </div>
   </div>
-
-  <div class="post_show_comment_index mx-auto">
-    <% unless @post.comments.empty? %>
-      <div class="row mb-5">
-        <% @post.comments.each do |comment| %>
-          <div class="col-md-9 offset-1 mt-2">
-             <%= link_to "#{comment.customer.name}", public_customer_path(comment.customer) %>さん
-          </div>
-          <div class="col-md-2">
-            <%= link_to '削除', public_post_comment_path(@post, comment), method: :delete, data: { confirm: '本当に削除しますか？' },class: 'btn btn-outline-secondary '%>
-          </div>
-          <div class="col-md-11 offset-1">
-            <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
-          </div>
-          <div class="col-md-11 offset-1">
-            <%= image_tag comment.customer.cover_image.thumb.url, class: "post_comment_customer_cover_image" %>
-          </div>
-          <div class="col-md-10 offset-1 post_comment_area">
-            <%= comment.comment %>
-          </div>
-        <% end %>
-      </div>
-    <% else %>
-    <div class="col-md-10 offset-1 mb-5">
-      <p class="text-center">まだコメントがありません</p>
-    </div>
-    <% end %>
+  <div id="post_comments_area">
+  <%= render 'public/comments/index', comments: @comments %>
   </div>
 </div>

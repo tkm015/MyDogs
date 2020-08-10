@@ -1,10 +1,12 @@
 <!-- いいね表示テンプレート (favorited_by?) => models/post.rbにて定義 -->
-<% if post.favorited_by?(current_public_customer) %>
-  <%= link_to public_post_favorites_path(post), method: :delete do %>
-    <i class="fas fa-heart heart_red"> <%= post.favorites.count %></i>
-  <% end %>
-<% else %>
-  <%= link_to public_post_favorites_path(post), method: :post do %>
-    <i class="fas fa-heart heart_gray"> <%= post.favorites.count %></i>
+<% if public_customer_signed_in? %>
+  <% if post.favorited_by?(current_public_customer) %>
+    <%= link_to public_post_favorites_path(post), method: :delete, remote: true do %>
+      <i class="fas fa-heart heart_red"> <%= post.favorites.count %></i>
+    <% end %>
+  <% else %>
+    <%= link_to public_post_favorites_path(post), method: :post, remote: true do %>
+      <i class="fas fa-heart heart_gray"> <%= post.favorites.count %></i>
+    <% end %>
   <% end %>
 <% end %>

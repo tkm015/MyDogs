@@ -16,7 +16,7 @@
 @import "bootstrap";
 
 body{
-	background-color: #FFFFDD;
+	background-color: #FFFFF0;
 }
 
 // カバー画像プレビュー表示サイズ
@@ -168,7 +168,9 @@ body{
 }
 
 .post_comment_area{
+	width: 90%;
 	border-bottom: 2px dotted #FFCC99;
+
 }
 // ーーーーーーーーーーーーーーーーーーーーー
 
@@ -206,5 +208,20 @@ body{
 }
 // ーーーーーーーーーーーーーーー
 nav{
-    background-color: #E4FF8D;
+    background-color: #FFFFFF;
+}
+
+.room_comment_customer_cover_image{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	position: relative;
+	bottom: 80px;
+	right: 50px;
+}
+
+.screenshot{
+	width: 252px;
+	height: 252px;
+	object-fit: cover;
 }
