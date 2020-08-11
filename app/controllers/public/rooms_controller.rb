@@ -1,7 +1,5 @@
 class Public::RoomsController < ApplicationController
-  def index
-    @rooms = current_public_customer.rooms.includes(:messages).order("messages.created_at desc")
-  end
+  before_action :authenticate_public_customer!, only: [:create, :show]
 
   def create
     @room = Room.create

@@ -1,7 +1,9 @@
-<P> 通知 </P>
-
-<% if @notifications.exists? %>
-	<%= render @notifications %>
-  <% else %>
-  <P>通知はありません。<P>
-<% end %>
+<div class="container">
+  <h3 class='ml-5 pt-2'> 通知 </h3>
+  <%= link_to'全ての通知を消す。',public_hide_path,class: 'ml-5' %>
+    <% if @notifications.exists? %>
+	  <%= render @notifications %>
+    <% else %>
+      <h3 class='ml-5 pt-2'>新しい通知はありません。</h3>
+    <% end %>
+</div>

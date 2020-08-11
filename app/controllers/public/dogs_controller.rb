@@ -1,4 +1,5 @@
 class Public::DogsController < ApplicationController
+  before_action :authenticate_public_customer!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_dog, only: [:show, :edit, :update]
   before_action :set_side, only: [:show]
   def new

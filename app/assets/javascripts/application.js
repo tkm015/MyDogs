@@ -18,34 +18,126 @@
 //= require popper
 //= require bootstrap
 
-// cover_imageプレビュー表示
-$(function() {
- function readURL(input) {
-   if (input.files && input.files[0]) {
-     const reader = new FileReader();
-     reader.onload = function (e) {
-       $('.cover_image_prev').attr('src', e.target.result);
-     }
-     reader.readAsDataURL(input.files[0]);
-   }
- }
- $(".cover_image").change(function(){
-   readURL(this);
- });
-});
+// 画像プレビュー表示
+  $(function() {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+    $('#img_prev1').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#customer_img1').change(function(){
+        readURL(this);
+    });
+  });
 
-// profile_imageプレビュー表示
-$(function() {
- function readURL(input) {
-   if (input.files && input.files[0]) {
-     const reader = new FileReader();
-     reader.onload = function (e) {
-       $('.profile_image_prev').attr('src', e.target.result);
-     }
-     reader.readAsDataURL(input.files[0]);
-   }
- }
- $(".profile_image").change(function(){
-   readURL(this);
- });
-});
+
+  $(function() {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+    $('#img_prev2').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#customer_img2').change(function(){
+        readURL(this);
+    });
+  });
+
+  $(function() {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+    $('#img_prev3').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#customer_img3').change(function(){
+        readURL(this);
+    });
+  });
+
+
+  $(function() {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+    $('#img_prev4').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#customer_img4').change(function(){
+        readURL(this);
+    });
+  });
+
+  $(function() {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+    $('#img_prev5').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#customer_img5').change(function(){
+        readURL(this);
+    });
+  });
+
+  $(function() {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+    $('#img_prev6').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#customer_img6').change(function(){
+        readURL(this);
+    });
+  });
+
+  $(function() {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+    $('#img_prev7').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#customer_img7').change(function(){
+        readURL(this);
+    });
+  });
+
+  $(function() {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+    $('#img_prev8').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#customer_img8').change(function(){
+        readURL(this);
+    });
+  });
+

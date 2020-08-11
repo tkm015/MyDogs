@@ -33,10 +33,10 @@ class VideoUploader < CarrierWave::Uploader::Base
   #   process resize_to_fill: [230, 230, "Center"]
   # end
 
-# 一覧表示用　スクリーンショット
+  # 一覧表示用　スクリーンショット
   version :screenshot do
     process :screenshot
-    def full_filename (for_file = model.logo.file)
+    def full_filename(for_file = model.logo.file)
       "screenshot.jpg"
     end
   end
@@ -45,15 +45,15 @@ class VideoUploader < CarrierWave::Uploader::Base
     tmpfile = File.join(File.dirname(current_path), "tmpfile")
     File.rename(current_path, tmpfile)
     movie = FFMPEG::Movie.new(tmpfile)
-    movie.screenshot(current_path + ".jpg", {resolution: '230x230' }, preserve_aspect_ratio: :width)
+    movie.screenshot(current_path + ".jpg", { resolution: '230x230' }, preserve_aspect_ratio: :width)
     File.rename(current_path + ".jpg", current_path)
     File.delete(tmpfile)
   end
 
-# 動画リサイズ
+  # 動画リサイズ
   version :size do
     process :size
-    def full_filename (for_file = model.logo.file)
+    def full_filename(for_file = model.logo.file)
       "video.mp4"
     end
   end
@@ -62,7 +62,7 @@ class VideoUploader < CarrierWave::Uploader::Base
     tmpfile = File.join(File.dirname(current_path), "tmpfile")
     File.rename(current_path, tmpfile)
     movie = FFMPEG::Movie.new(tmpfile)
-    movie.transcode(current_path + ".mp4", {resolution: '600x360' }, preserve_aspect_ratio: :width)
+    movie.transcode(current_path + ".mp4", { resolution: '600x360' }, preserve_aspect_ratio: :width)
     File.rename(current_path + ".mp4", current_path)
     File.delete(tmpfile)
   end

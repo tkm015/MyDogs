@@ -17,9 +17,11 @@ class Post < ApplicationRecord
     validates :title
     validates :text
   end
+  validates :title, length: { maximum: 30 }
+  validates :text, length: { maximum: 200 }
 
   def video_or_image
-    video.presence or image.presence
+    video.presence || image.presence
   end
 
   # favoriteにログインcustomerが含まれているか判定

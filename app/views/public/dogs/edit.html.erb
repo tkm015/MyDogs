@@ -56,12 +56,13 @@
       </div>
       <div class="col-md-9">
       	<% if @dog.cover_image.present? %>
-          <%= image_tag @dog.cover_image.url, class: 'cover_image_prev' %><br>
+          <%= image_tag @dog.cover_image.url, id: :img_prev1 %><br>
         <% else %>
-          <%= image_tag 'noimage.jpg', class: 'cover_image_prev' %><br>
+          <%= image_tag 'noimage.jpg', id: :img_prev1 %><br>
         <% end %>
-        <%= f.file_field :cover_image, class: 'cover_image' %>
+        <%= f.file_field :cover_image, id: :customer_img1 %>
       </div>
+
     </div>
     <div class="form-group row">
       <div class="col-md-3">
@@ -69,15 +70,13 @@
       </div>
       <div class="col-md-9">
       	<% if @dog.profile_image.present? %>
-          <%= image_tag @dog.profile_image.url, class: 'profile_image_prev' %><br>
+          <%= image_tag @dog.profile_image.url, id: :img_prev2 %><br>
         <% else %>
-          <%= image_tag 'noimage.jpg', class: 'profile_image_prev' %><br>
+          <%= image_tag 'noimage.jpg', id: :img_prev2 %><br>
         <% end %>
-        <%= f.file_field :profile_image, class: 'profile_image' %>
+        <%= f.file_field :profile_image, id: :customer_img2 %>
       </div>
     </div>
 	  <%= f.submit '登録',class: 'btn btn-outline-dark' %>
     <% end %>
 </div>
-
-

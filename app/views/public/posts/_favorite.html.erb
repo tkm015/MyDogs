@@ -2,11 +2,11 @@
 <% if public_customer_signed_in? %>
   <% if post.favorited_by?(current_public_customer) %>
     <%= link_to public_post_favorites_path(post), method: :delete, remote: true do %>
-      <i class="fas fa-heart heart_red"> <%= post.favorites.count %></i>
+      <i class="fas fa-heart faa-tada animated" style="color: red;" > <%= post.favorites.count %></i>
     <% end %>
   <% else %>
     <%= link_to public_post_favorites_path(post), method: :post, remote: true do %>
-      <i class="fas fa-heart heart_gray"> <%= post.favorites.count %></i>
+      <i class="far fa-heart"> <%= post.favorites.count %></i>
     <% end %>
   <% end %>
 <% end %>

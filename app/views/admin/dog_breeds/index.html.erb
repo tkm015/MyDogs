@@ -1,13 +1,29 @@
-<h1>犬種登録</h1>
-<%= form_for @dog_breed, url: admin_dog_breeds_path do |f| %>
-  <%= f.label :name, '犬種' %>
-  <%= f.text_field :name %>
-  <%=f.submit '登録' %>
-<% end %>
+<div class="container">
+  <h2>犬種登録</h2>
+  全<%= @dog_breeds.count %>種登録
+  <div class="form-group form-inline ">
+    <%= form_for @dog_breed, url: admin_dog_breeds_path do |f| %>
+      <%= f.text_field :name,class: 'form-control'  %>
+      <%=f.submit '登録', class: 'btn btn-outline-secondary' %>
+    <% end %>
+  </div>
 
-<h1>犬種一覧</h1>
-  <% @dog_breeds.each do |dog_breed| %>
-    <%= dog_breed.name %>
-    <%= link_to '削除', admin_dog_breed_path(dog_breed), method: :delete, data: { confirm: '本当に削除しますか？' } %>
-  <% end %>
-
+  <h3>犬種一覧</h3>
+  <table class="table table-hover bg-white">
+	<tbody>
+      <% @dog_breeds.each do |dog_breed| %>
+        <tr>
+		  <th>
+		    <%= dog_breed.name %>
+		  </th>
+      <th>
+        <%= link_to '削除', admin_dog_breed_path(dog_breed), method: :delete, data: { confirm: '本当に削除しますか？' },class: 'btn btn-outline-secondary' %>
+      </th>
+		</tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="col-md-4 offset-4">
+  <%= paginate @dog_breeds %>
+</div>
+</div>

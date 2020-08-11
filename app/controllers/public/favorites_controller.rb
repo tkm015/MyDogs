@@ -1,4 +1,5 @@
 class Public::FavoritesController < ApplicationController
+  before_action :authenticate_public_customer!, only: [:create, :destroy]
   def create
     @post = Post.find(params[:post_id])
     @post.create_notification_favorite!(current_public_customer)

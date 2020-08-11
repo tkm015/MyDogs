@@ -2,7 +2,7 @@
 
 class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-
+  before_action :reject_customer, only: [:create]
   # GET /resource/sign_in
   # def new
   #   super
@@ -28,7 +28,17 @@ class Public::SessionsController < Devise::SessionsController
     public_root_path
   end
 
-  # protected
+  protected
+
+  def reject_customer
+    @customer = Customer.find_by(email: params[:public_customer][:email])
+    if @customer
+      if @customer.active_for_authentication? == "退会"
+        flash[:notice] = "退会済みです。"
+        redirect_back(fallback_location: root_path)
+      end
+    end
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

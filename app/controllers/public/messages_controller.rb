@@ -1,6 +1,6 @@
 class Public::MessagesController < ApplicationController
+  before_action :authenticate_public_customer!, only: [:create, :destroy]
   before_action :set_room, only: [:create, :destroy]
-
   def create
     if Entry.where(customer_id: current_public_customer.id, room_id: @room.id)
       @message = Message.create(message_params)
@@ -11,7 +11,8 @@ class Public::MessagesController < ApplicationController
         render :message_index
       end
     else
-      flash[:alert] = "メッセージ送信に失敗しました"
+      flash, new[:alert] = "メッセージ送信に失敗しました"
+      render 'public/posts/show'
     end
   end
 
@@ -26,6 +27,7 @@ class Public::MessagesController < ApplicationController
   end
 
   private
+
   def set_room
     @room = Room.find(params[:message][:room_id])
   end

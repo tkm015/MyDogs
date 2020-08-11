@@ -1,5 +1,6 @@
 class Public::PostsController < ApplicationController
-  before_action :set_dogs, onlr: [ :newimage, :newvideo, :create]
+  before_action :authenticate_public_customer!, only: [:newimage, :newvideo, :edit, :create, :update, :destroy]
+  before_action :set_dogs, only: [:newimage, :newvideo, :create, :edit]
   def newimage
     @post = Post.new
   end
@@ -10,6 +11,7 @@ class Public::PostsController < ApplicationController
 
   def index
     if params[:tag_name]
+      @tag_name = params[:tag_name]
       @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page]).order('created_at DESC').per(8)
     elsif params[:image]
       @image = params[:image]
@@ -29,6 +31,7 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
   end
 
   def create
@@ -42,6 +45,9 @@ class Public::PostsController < ApplicationController
   end
 
   def update
+    @post = Post.find(params[:id])
+    @post.update(post_params)
+    redirect_to public_post_path(@post)
   end
 
   def destroy
@@ -51,6 +57,7 @@ class Public::PostsController < ApplicationController
   end
 
   private
+
   def set_dogs
     @dogs = current_public_customer.dogs
   end

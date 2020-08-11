@@ -1,0 +1,2 @@
+$("#relationship<%= @dog.id %>").html("<%= j(render 'public/relationships/relationship', dog: @dog) %>")
+$("#relationship_count <%= @dog.id %>").html("<%= j(render 'public/relationships/relationship_count', dog: @dog) %>")

@@ -15,18 +15,41 @@
  */
 @import "bootstrap";
 
+*{
+	font-family: YuGothic;
+}
+
 body{
 	background-color: #FFFFF0;
 }
-
-// カバー画像プレビュー表示サイズ
-.cover_image_prev{
-	margin: 0 5px 5px 0;
-    max-width: 200px;
-    vertical-align: bottom;
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
-// プロフィール画像プレビュー表示サイズ
-.profile_image_prev{
+
+footer {
+  margin-top: auto;
+}
+
+#top_title{
+	font-family: Courier;
+}
+
+#title{
+	font-family: Courier;
+	font-size: 50px;
+}
+
+// 画像プレビュー表示サイズ
+#img_prev1,
+#img_prev2,
+#img_prev3,
+#img_prev4,
+#img_prev5,
+#img_prev6,
+#img_prev7,
+#img_prev8{
 	margin: 0 5px 5px 0;
     max-width: 200px;
     vertical-align: bottom;
@@ -104,20 +127,17 @@ body{
 	bottom: 15px;
 	right: 10px;
 }
+
+.owner_area{
+	position: absolute;
+	bottom: 90px;
+	right: 70px;
+}
 // ーーーmyページ・dog(show)上部分ーーー
 
 .created_font_size{
 	font-size: 10px;
 }
-// --いいねハートカラーーー
-.heart_red{
-	color: #FF0000;
-}
-
-.heart_gray{
-	color: #808080;
-}
-// ーーーーーーーーーーーーーー
 
 // indexページカバー画像サイズ
 .index_cover_image{
@@ -199,9 +219,9 @@ body{
 
 .top_back_image{
 	margin: 0 auto;
-	height: 500px;
+	height: 450px;
 	width: 100%;
-	background-image: url('top.jpg');
+	background-image: url('top3.jpg');
 	background-position: center;
 	background-size: cover;
 	text-align: center;
@@ -219,9 +239,35 @@ nav{
 	bottom: 80px;
 	right: 50px;
 }
-
+// スクリーンショットサイズ
 .screenshot{
 	width: 252px;
 	height: 252px;
 	object-fit: cover;
 }
+// スクリーンショットサイズ１
+.screenshot1{
+	width: 220px;
+	height: 220px;
+	object-fit: cover;
+}
+// 通知表示
+.notification_area{
+	border-bottom: 2px dotted #FFCC99;
+	background-color: #FFFFFF;
+}
+
+// 通知未確認アイコン表示
+.fa-circle{
+	position: relative;
+	bottom: 7px;
+	left: 12px;
+}
+
+.about_image{
+	width: 30%;
+	height: 100%;
+	border-radius: 50%;
+}
+
+

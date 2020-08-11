@@ -1,22 +1,38 @@
-<div class="container">
-<h1>すべての投稿</h1>
+<div class="container mt-3">
 <div class="row">
- <% posts.each do |post| %>
- <div class="card mx-2 w-25">
- <% if post.image? %>
-   <%= image_tag post.image.thumb.url, alt: '画像'%>
-   <% else %>
-      <%= video_tag post.video.url%>
-   <% end %>
-    <div class="card-body">
-   <%= image_tag post.dog.cover_image.thumb.url %>
-   <%= link_to "#{post.dog.name}",public_post_path(post) %>
-   <%= post.title %>
-   <%= post.text %>
-   <%= render 'public/posts/tag_list', tag_list: post.tag_list %>
-   <%= post.updated_at.strftime("%Y-%m-%d %H:%M") %>
- <% end %>
+  <% posts.each do |post| %>
+    <div class="card  col-md-3 mx-auto" >
+      <% if post.image? %>
+        <%= image_tag post.image.thumb.url, alt: '画像',class: "card-img-top" %>
+      <% else %>
+        <%= image_tag post.video_url(:screenshot).to_s,class: "card-img-top screenshot" %>
+      <% end %>
+      <div class="card-body ">
+        <p class="card-title">
+          <%= image_tag post.dog.cover_image.thumb.url, class: 'index_cover_image' %>
+          <% if post.dog.sex == "男の子" %>
+            <%= link_to "#{post.dog.name}",public_dog_path(post.dog) %>くん
+          <% else %>
+            <%= link_to "#{post.dog.name}",public_dog_path(post.dog) %>ちゃん
+          <% end %>
+        </p>
+        <p class="card-text">
+        <div id="favorite-<%= post.id %>">
+          <%= render 'public/posts/favorite', post: post %>
+         </div>
+          <%= link_to public_post_path(post) do %>
+            <%= truncate(post.title, :length =>13) %>
+          <% end %>
+        </p>
+        <%= post.updated_at.strftime("%Y-%m-%d %H:%M") %>
+
+      </div>
+    </div>
+  <% end %>
 </div>
-</div>
+<div class="row">
+  <div class="mx-auto mt-3">
+    <%= paginate posts %>
+  </div>
 </div>
 </div>

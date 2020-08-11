@@ -1,0 +1,81 @@
+<div class="container mt-5 mb-3">
+  <h1>会員情報編集</h1>
+    <%= form_for @customer, url: admin_customer_path do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+    <%= flash[:notice] %>
+      <div class="form-group row">
+        <div class="col-md-3">
+          <%= f.label :name, 'ニックネーム' %>
+        </div>
+        <div class="col-md-3">
+          <%= f.text_field :name,class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-3">
+          <%= f.label :date_of_birth, '生年月日' %>
+        </div>
+        <div class="col-md-4">
+          <%= raw sprintf(
+                f.date_select(
+                  :date_of_birth,
+                  use_month_numbers: true,
+                  start_year: 1930,
+                  end_year: (Time.now.year),
+                  default: Date.new(2000, 1, 1),
+                  date_separator: '%s'),
+                '年 ', '月 ') + '日' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-3">
+          <%= f.label :introduction, '自己紹介分' %>
+        </div>
+        <div class="col-md-9">
+          <%= f.text_area :introduction,class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-3">
+          <%= f.label :cover_image, 'カバー画像' %>
+        </div>
+        <div class="col-md-3">
+          <% if @customer.cover_image.present? %>
+            <%= image_tag @customer.cover_image.url, id: :img_prev7 %><br>
+          <% else %>
+            <%= image_tag 'noimage.jpg', id: :img_prev7 %><br>
+          <% end %>
+          <%= f.file_field :cover_image, id: :customer_img7 %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-3">
+          <%= f.label :profile_image, 'プロフィール画像' %>
+        </div>
+        <div class="col-md-3">
+          <% if @customer.profile_image.present? %>
+            <%= image_tag @customer.profile_image.url, id: :img_prev8 %><br>
+          <% else %>
+            <%= image_tag 'noimage.jpg', id: :img_prev8 %><br>
+          <% end %>
+          <%= f.file_field :profile_image, id: :customer_img8 %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-3">
+          <%= f.label :is_active, '会員ステータス' %>
+        </div>
+        <div class="col-md-3">
+          <div class="field">
+            <label><%= f.radio_button :is_active, "有効" %>有効</label>
+            <label><%= f.radio_button :is_active, "退会" %>退会済み</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-3">
+          <%= f.submit '変更を保存',class: 'btn btn-outline-secondary' %>
+        </div>
+    <% end %>
+      </div>
+</div>

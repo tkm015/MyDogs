@@ -1,9 +1,7 @@
-<div class="container ">
-  <h2>記事詳細</h2>
-</div>
-<div class="container ">
+<div class="container mt-3">
+  <h2 class="text-center">記事詳細</h2>
   <div class="post_show_main mx-auto">
-    <div class="row mt-5">
+    <div class="row">
       <div class="col-md-10 offset-1">
         <p class="post_show_title mt-2"><%= @post.title %></p>
       </div>
@@ -16,12 +14,14 @@
           <%=@post.dog.dog_breed.name %>
       </div>
       <div class="col-md-2">
-        <% if @post.customer_id == current_public_customer.id %>
-          <%= link_to public_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' } ,class: 'btn btn-outline-secondary ' do%>
-            <i class="fas fa-minus">削除</i>
+        <% if public_customer_signed_in? %>
+          <% if @post.customer_id == current_public_customer.id %>
+            <%= link_to "編集", edit_public_post_path(@post) %>
+          <% else %>
+            <div id="relationship<%= @post.dog.id %>">
+              <%= render 'public/relationships/relationship', dog: @post.dog %>
+            </div>
           <% end %>
-        <% else %>
-          <%= render 'public/relationships/relationship', dog: @post.dog %>
         <% end %>
       </div>
       <div class="col-md-3 offset-1">

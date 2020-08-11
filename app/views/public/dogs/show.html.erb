@@ -1,28 +1,41 @@
-<div class="container">
-  <p><%= @dog.name %>くん</p>
+<div class="container mb-3">
+  <% if @dog.sex == "男の子" %>
+    <p><%= @dog.name %>くん</p>
+  <% else %>
+    <p><%= @dog.name %>ちゃん</p>
+  <% end %>
     <div class="show_head">
       <%= image_tag @dog.cover_image.cover.url, alt: '画像',class: 'top_cover_image'%>
       <%= image_tag @dog.profile_image.url, alt: '画像',class: 'top_profile_image'%>
       <% if @dog.sex == "男の子" %>
-      <p class="top_name"><%= @dog.name %>くん</p>
+        <p class="top_name"><%= @dog.name %>くん</p>
       <% else %>
-      <p class="top_name"><%= @dog.name %>ちゃん</p>
+        <p class="top_name"><%= @dog.name %>ちゃん</p>
       <% end %>
       <div class="top_tag_follow">
       	<%= link_to public_followers_path(dog_id: @dog.id),class: 'btn btn-link' do %>
-        <i class="fas fa-paw">フォロワー<%= @dog.relationships.count %></i>
+        <div id="relationship_count <%= @dog.id %>">
+          <%= render 'public/relationships/relationship_count', dog: @dog %>
+        </div>
         <% end %>
       </div>
+      <div class="owner_area">
+        <i class="fas fa-user">Owner<%= link_to "#{@dog.customer.name}", public_customer_path(@dog.customer) %>さん</i>
+      </div>
       <div class="top_tag_edit_or_dm">
-      <% if @dog.customer_id == current_public_customer.id %>
-          <%= link_to edit_public_dog_path(@dog),class: 'btn btn-outline-secondary ' do %>
-            <i class="fas fa-pencil-alt">編集</i>
-          <% end %>
-          <%= link_to public_dog_path(@dog), method: :delete, data: { confirm: '本当に削除しますか？' },class: 'btn btn-outline-secondary ' do %>
-            <i class="fas fa-minus">削除</i>
-          <% end %>
-      <% else %>
-          <%= render 'public/relationships/relationship', dog: @dog %>
+      <% if public_customer_signed_in? %>
+        <% if @dog.customer_id == current_public_customer.id %>
+            <%= link_to edit_public_dog_path(@dog),class: 'btn btn-outline-secondary ' do %>
+              <i class="fas fa-pencil-alt">編集</i>
+            <% end %>
+            <%= link_to public_dog_path(@dog), method: :delete, data: { confirm: '本当に削除しますか？' },class: 'btn btn-outline-secondary' do %>
+              <i class="fas fa-minus">削除</i>
+            <% end %>
+        <% else %>
+        <div id="relationship<%= @dog.id %>">
+            <%= render 'public/relationships/relationship', dog: @dog %>
+        </div>
+        <% end %>
       <% end %>
       </div>
     </div>
@@ -59,7 +72,11 @@
       <div class="row ">
           <% @dog_posts.each do |post| %>
             <div class="card  col-md-4 mx-auto" >
-              <%= image_tag post.image.thumb.url,class: "card-img-top" %>
+              <% if post.image? %>
+                <%= image_tag post.image.thumb.url,class: "card-img-top" %>
+              <% else %>
+                <%= image_tag post.video_url(:screenshot).to_s,class: "card-img-top screenshot1" %>
+              <% end %>
                 <div class="card-body">
                   <p class="card-title">
                     <% if post.dog.sex == "男の子" %>

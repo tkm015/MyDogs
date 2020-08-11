@@ -1,7 +1,8 @@
 class Admin::DogBreedsController < ApplicationController
+  before_action :authenticate_admin_admin!
   def index
     @dog_breed = DogBreed.new
-    @dog_breeds = DogBreed.all
+    @dog_breeds = DogBreed.page(params[:page]).order('created_at DESC').per(10)
   end
 
   def create

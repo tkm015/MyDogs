@@ -4,8 +4,14 @@
     <p class="text-center card-header"><i class="fas fa-dog fa-lg"></i>新着投稿</p>
     <div class="card-text text-center" >
       <% posts.each do |p| %>
-        <%= link_to public_post_path(p) do %>
-          <%= image_tag p.image.url,class: 'side_new_posts_image' %>
+        <% if p.image? %>
+          <%= link_to public_post_path(p) do %>
+            <%= image_tag p.image.url,class: 'side_new_posts_image' %>
+          <% end %>
+        <% else %>
+          <%= link_to public_post_path(p) do %>
+            <%= image_tag p.video_url(:screenshot).to_s,class: 'side_new_posts_image' %>
+          <% end %>
         <% end %>
       <% end %>
       <div class='text-right'>

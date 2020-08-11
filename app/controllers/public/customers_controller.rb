@@ -1,5 +1,5 @@
 class Public::CustomersController < ApplicationController
-  before_action :set_customer, only: [:show, :edit]
+  before_action :set_customer, only: [:show, :edit, :update, :hide]
   before_action :set_side, only: [:top, :show]
   before_action :follows_new_posts, only: [:show]
   def top
@@ -9,7 +9,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def show
-    @dog = current_public_customer.dogs.page(params[:page]).order('created_at DESC').per(6)
+    @dog = @customer.dogs.page(params[:page]).order('created_at DESC').per(6)
     if public_customer_signed_in?
       # cureent_customerがルームに参加しているか確認
       @current_public_customer_entry = Entry.where(customer_id: current_public_customer.id)
@@ -39,12 +39,26 @@ class Public::CustomersController < ApplicationController
   end
 
   def update
-    customer = Customer.find(params[:id])
-    customer.update(customer_params)
-    redirect_to public_customer_path(customer)
+    if @customer.update(customer_params)
+      redirect_to public_customer_path(@customer)
+    else
+      render 'edit'
+    end
+  end
+
+  # ユーザー理論削除
+  def hide
+    @customer.update(is_active: "退会")
+    reset_session
+    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
+    redirect_to public_root_path
+  end
+
+  def about
   end
 
   private
+
   # サイド用データ取得
   def set_side
     @new_posts = Post.order('created_at DESC').limit(9)
@@ -53,7 +67,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def follows_new_posts
-    follow_dogs = Relationship.where(customer_id: current_public_customer.id).pluck(:dog_id)
+    follow_dogs = Relationship.where(customer_id: @customer.id).pluck(:dog_id)
     @follows_new_posts = Post.where(dog_id: follow_dogs).order('created_at DESC').limit(8)
   end
 

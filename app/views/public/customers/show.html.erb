@@ -10,12 +10,14 @@
         <% end %>
       </div>
       <div class="top_tag_edit_or_dm">
-        <% if @customer.id == current_public_customer.id %>
-          <%= link_to edit_public_customer_path(current_public_customer), class: 'btn btn-outline-secondary' do %>
-          <i class="fas fa-pencil-alt">プロフィール編集</i>
+        <% if public_customer_signed_in? %>
+          <% if @customer.id == current_public_customer.id %>
+            <%= link_to edit_public_customer_path(current_public_customer), class: 'btn btn-outline-secondary' do %>
+            <i class="fas fa-pencil-alt">プロフィール編集</i>
+            <% end %>
+          <% else %>
+            <%= render 'public/customers/contact', have_room: @have_room, room_id: @room_id, romm: @room, entry: @entry, customer: @customer%>
           <% end %>
-        <% else %>
-          <%= render 'public/customers/contact', have_room: @have_room, room_id: @room_id, romm: @room, entry: @entry, customer: @customer%>
         <% end %>
       </div>
     </div>
@@ -32,7 +34,7 @@
     <% end %>
   </div>
 
-  <P class="mt-2">フォロー中のペットの新着投稿</P>
+  <P class="mt-2"><%= @customer.name %>さんのフォロー中のペットの新着投稿</P>
     <% if @follows_new_posts.empty? %>
       <div class="row">
         <div class="col-md-10 offset-1 bg-white">
@@ -43,7 +45,11 @@
       <div class="row ">
         <% @follows_new_posts.each do |post| %>
           <div class="card  col-md-3 mx-auto" >
-            <%= image_tag post.image.thumb.url,class: "card-img-top" %>
+            <% if post.image? %>
+              <%= image_tag post.image.thumb.url,class: "card-img-top" %>
+            <% else %>
+              <%= image_tag post.video_url(:screenshot).to_s,class: "screenshot card-img-top" %>
+            <% end %>
               <div class="card-body">
                 <p class="card-title">
                   <% if post.dog.sex == "男の子" %>
@@ -56,7 +62,9 @@
                   <div id="favorite-<%= post.id %>">
                     <%= render 'public/posts/favorite', post: post %>
                   </div>
-                  <%= truncate(post.title, :length =>15)%></p>
+                  <%= link_to public_post_path(post) do %>
+                    <%= truncate(post.title, :length =>15)%>
+                  <% end %><br>
                   <%= post.created_at.strftime('%Y/%m/%d %H:%M') %>
               </div>
           </div>
@@ -69,9 +77,11 @@
 	    <%= @customer.name %>さんのペット
 	  </div>
 	  <div class="col-md-3 offset-3">
-      <% if @customer.id == current_public_customer.id %>
-        <%= link_to new_public_dog_path, class: 'btn btn-outline-secondary' do%>
-        <i class="fas fa-plus">ペット登録</i>
+      <% if public_customer_signed_in? %>
+        <% if @customer.id == current_public_customer.id %>
+          <%= link_to new_public_dog_path, class: 'btn btn-outline-secondary' do%>
+          <i class="fas fa-plus">ペット登録</i>
+          <% end %>
         <% end %>
       <% end %>
     </div>
@@ -98,6 +108,7 @@
                     </div>
                     <div class="col-md-6">
                       <%= link_to "フォロワー＞#{dog.relationships.count}",public_followers_path(dog_id: dog.id),class: 'btn btn-link btn-size' %>
+                      <% if public_customer_signed_in? %>
                         <% if @customer.id == current_public_customer.id %>
                           <%= link_to edit_public_dog_path(dog),class: 'btn btn-outline-secondary btn-size' do %>
                             <i class="fas fa-pencil-alt">編集</i>
@@ -106,6 +117,7 @@
                             <i class="fas fa-minus">削除</i>
                           <% end %>
                         <% end %>
+                      <% end %>
                     </div>
                   </div>
                 </div>

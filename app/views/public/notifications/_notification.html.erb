@@ -1,25 +1,31 @@
 <% visitor = notification.visitor %>
 <% visited = notification.visited %>
-<hr>
-<br>
-visitor: <%= visitor.id %><br> 
-visited: <%= visited.id %><br>
-投稿者id: <%= notification.post.customer_id %><br>
-ログインユーザーid: <%= current_public_customer.id %><br>
-<% if current_public_customer.id == visited.id %>
-<%= link_to "#{visitor.name}",public_customer_path(visitor) %>さんが
-<% case notification.action %>
-	<% when 'favorite' then %>
-	  <P><%= link_to "あなたの投稿", public_post_path(notification.post.id) %>にいいねしました。</P>
-	<% when 'comment' then %>
-	  <% if notification.post.customer_id  == current_public_customer.id  %>
-	    <%= link_to "あなたの投稿", public_post_path(notification.post.id) %>
-	  <% else %>
-	    <%= link_to "#{notification.post.customer.name}さんの投稿", public_post_path(notification.post.id) %>
-	  <% end %>
-	  にコメントしました
-	<%= Comment.find_by(id: notification.comment_id)&.comment %>
-<% end %>
-	<%= notification.created_at.strftime("%Y-%m-%d %H:%M") %>
-<% end %>
-<br>
+<div class="row notification_area pt-2">
+  <% if current_public_customer.id == visited.id %>
+    <div class="col-md-8 offset-2 text-left">
+      <%= link_to "#{visitor.name}",public_customer_path(visitor) %>さんが
+    </div>
+    <% case notification.action %>
+	  <% when 'favorite' then %>
+	    <div class="col-md-8 offset-2 text-left">
+	      <P><%= link_to "あなたの投稿", public_post_path(notification.post.id) %>にいいねしました。</P>
+	    </div>
+	    <% when 'comment' then %>
+	      <% if notification.post.customer_id  == current_public_customer.id  %>
+	        <div class="col-md-8 offset-2 text-left">
+	          <p><%= link_to "あなたの投稿", public_post_path(notification.post.id) %>にコメントしました。</p>
+	        </div>
+	      <% else %>
+	        <div class="col-md-8 offset-2 text-left">
+	          <p><%= link_to "#{notification.post.customer.name}さんの投稿", public_post_path(notification.post.id) %>にコメントしました。</p>
+	        </div>
+	      <% end %>
+	      <div class="col-md-8 offset-2 text-left">
+	        <p><%= Comment.find_by(id: notification.comment_id)&.comment %></p>
+          </div>
+    <% end %>
+    <div class="col-md-8 offset-2 text-left">
+	  <p><%= notification.created_at.strftime("%Y-%m-%d %H:%M") %><p>
+    </div>
+  <% end %>
+</div>

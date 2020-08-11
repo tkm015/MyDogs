@@ -1,6 +1,6 @@
 <div class="container-fluid">
    <div class="top_back_image">
-   	  <h1><i class="fas fa-crown"></i>Most popular dog<i class="fas fa-crown"></i></h1>
+   	  <h1 id="top_title">Most popular dog</h1>
    	    <%= link_to public_dog_path(@dog) do %>
           <%= image_tag @dog.profile_image.top.url,class: 'top_popular_dog_image' %>
         <% end %>
@@ -21,7 +21,11 @@
       <div class="row ">
           <% @post.each do |post| %>
             <div class="card  col-md-4 mx-auto" >
+              <% if post.image? %>
               <%= image_tag post.image.thumb.url,class: "card-img-top" %>
+              <% else %>
+              <%= image_tag post.video_url(:screenshot).to_s,class: "card-img-top screenshot1" %>
+              <% end %>
                 <div class="card-body">
                   <p class="card-title">
                     <% if post.dog.sex == "男の子" %>

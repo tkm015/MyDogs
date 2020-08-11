@@ -1,7 +1,7 @@
 <!-- ログイン有 -->
 <nav class="navbar navbar-expand-lg navbar-light  displaycol">
   <div class="container">
-	<h1>MyDogs</h1>
+	<h1 id="title">MyDogs</h1>
       <div class="row">
 	  	<div class="col-md-6 offset-2">
 	 	  <p>ようこそ<%= link_to"#{current_public_customer.name}", public_customer_path(current_public_customer) %>さん</p>
@@ -9,15 +9,19 @@
         <div class="col-md-2 text-right">
           <div class="dropdown">
         	<button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-bars">menu</i>
+              <i class="fas fa-bars" style="color: black;">menu</i>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <%= link_to 'ログアウト',destroy_public_customer_session_path, method: :delete,class: "dropdown-item"  %>
               <%= link_to 'マイページ',public_customer_path(current_public_customer),class: "dropdown-item"%>
+              <%= link_to 'About',root_path,class: "dropdown-item"%>
             </div>
           </div>
         </div>
         <div class="col-md-1 text-right">
+          <% if unchecked_notifications.any? %>
+            <i class="fa fa-circle fa-xs" style="color: gold;"></i>
+          <% end %>
           <%= link_to public_notifications_path do %>
             <i class="far fa-bell fa-lg"></i>
           <% end %>
@@ -28,33 +32,33 @@
 	        <%= form_tag(public_search_path, method: :get) do %>
 	          <%= select_tag 'search[model]', options_for_select({"投稿" => "post", "タグ" => "tag", "犬種" => "dog" }),class: 'form-control' %>
 	          <%= text_field_tag 'search[content]','', class: 'form-control'%>
-	          <%= submit_tag "検索", class: 'btn btn-outline-dark' %>
+	          <%= submit_tag "検索", class: 'btn btn-outline-secondary' %>
 	        <% end %>
 	      </div>
 	    </div>
         <div class="col-md-2 ">
-          <%= link_to public_root_path, class: "nav-link text-dark btn btn-outline-dark btn-block" do%>
+          <%= link_to public_root_path, class: "nav-link text-dark btn btn-outline-secondary btn-block" do%>
             <i class="fas fa-home">H O M E</i>
           <% end %>
         </div>
         <div class="col-md-2 ">
-          <%= link_to public_posts_path, class: "nav-link text-dark btn btn-outline-dark btn-block" do%>
+          <%= link_to public_posts_path, class: "nav-link text-dark btn btn-outline-secondary btn-block" do%>
             <i class="fas fa-paw">投 稿 一 覧</i>
           <% end %>
         </div>
         <div class="col-md-2 ">
-          <%= link_to public_posts_path(image: "image"), class: "nav-link text-dark btn btn-outline-dark btn-block" do%>
+          <%= link_to public_posts_path(image: "image"), class: "nav-link text-dark btn btn-outline-secondary btn-block" do%>
             <i class="fas fa-camera">写 真 一 覧</i>
           <% end %>
         </div>
         <div class="col-md-2 ">
-          <%= link_to public_posts_path(video: "video"), class: "nav-link text-dark btn btn-outline-dark btn-block" do%>
+          <%= link_to public_posts_path(video: "video"), class: "nav-link text-dark btn btn-outline-secondary btn-block" do%>
             <i class="fas fa-play-circle">動 画 一 覧</i>
           <% end %>
         </div>
         <div class="col-md-1 offset-1">
       	  <div class="dropdown">
-      		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      		<button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               投稿
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

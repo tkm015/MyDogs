@@ -1,5 +1,48 @@
 <!-- ログインなし -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-<%= link_to '新規登録', new_public_customer_registration_path, class: "nav-link text-white btn btn-outline-light" %>
-<%= link_to 'ログイン', new_public_customer_session_path, class: "nav-link text-white btn btn-outline-light" %>
+<nav class="navbar navbar-expand-lg navbar-light  displaycol">
+  <div class="container">
+	<h1 id="title">MyDogs</h1>
+      <div class="row">
+      	<div class="col-md-2 offset-8">
+          <%= link_to '新規登録', new_public_customer_registration_path, class: "nav-link btn btn-outline-secondary" %>
+      	</div>
+      	<div class="col-md-2 mb-3">
+          <%= link_to 'ログイン', new_public_customer_session_path, class: "nav-link btn btn-outline-secondary" %>
+      	</div>
+	    <div class="col-md-5 offset-7 ">
+	      <div class="form-group form-inline ">
+	        <%= form_tag(public_search_path, method: :get) do %>
+	          <%= select_tag 'search[model]', options_for_select({"投稿" => "post", "タグ" => "tag", "犬種" => "dog" }),class: 'form-control' %>
+	          <%= text_field_tag 'search[content]','', class: 'form-control'%>
+	          <%= submit_tag "検索", class: 'btn btn-outline-secondary' %>
+	        <% end %>
+	      </div>
+	    </div>
+        <div class="col-md-2 ">
+          <%= link_to public_root_path, class: "nav-link text-dark btn btn-outline-secondary btn-block" do%>
+            <i class="fas fa-home">H O M E</i>
+          <% end %>
+        </div>
+        <div class="col-md-2 ">
+          <%= link_to root_path, class: "nav-link text-dark btn btn-outline-secondary btn-block" do%>
+            <i class="fas fa-sticky-note">ABOUT</i>
+          <% end %>
+        </div>
+        <div class="col-md-2 ">
+          <%= link_to public_posts_path, class: "nav-link text-dark btn btn-outline-secondary btn-block" do%>
+            <i class="fas fa-paw">投 稿 一 覧</i>
+          <% end %>
+        </div>
+        <div class="col-md-2 ">
+          <%= link_to public_posts_path(image: "image"), class: "nav-link text-dark btn btn-outline-secondary btn-block" do%>
+            <i class="fas fa-camera">写 真 一 覧</i>
+          <% end %>
+        </div>
+        <div class="col-md-2 ">
+          <%= link_to public_posts_path(video: "video"), class: "nav-link text-dark btn btn-outline-secondary btn-block" do%>
+            <i class="fas fa-play-circle">動 画 一 覧</i>
+          <% end %>
+        </div>
+	  </div>
+	</div>
 </nav>

@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row mt-5">
+	<div class="col-md-12">
+	  <h4 class="text-center pt-3">MyDogsは、犬で繋がるコミュニケーションサイトです。</h4>
+	</div>
+	<div class="col-md-12 text-center mt-3 mb-3">
+	  <img src = '/assets/about_img1.jpg' class="about_image">
+	  <img src = '/assets/about_img2.jpg' class="about_image">
+	  <img src = '/assets/about_img3.jpg' class="about_image">
+	</div>
+	<div class="col-md-12">
+	  <p class="text-center pt-3">MyDogsでは、犬達の可愛い写真、楽しい動画、普段の生活を投稿し、思い出を記録することができます。<br>
+		犬たちの成長は早いもの、<br>
+        初めての出会い、誕生日、大好きなおもちゃ、よく遊ぶ場所など<br>
+        大切な日々を思い出として残していきましょう。</p>
+	</div>
+	<div class="col-md-12 text-center mb-3">
+	  <%= link_to '全ての記事を見る。', public_posts_path, class: "btn btn-link" %>
+	  <%= link_to '新着写真の一覧を見る。', public_posts_path(image: "image"), class: "btn btn btn-link" %>
+	  <%= link_to '新着動画の一覧を見る。', public_posts_path(video: "video"), class: " btn btn btn-link" %>
+	</div>
+	<div class="col-md-12 text-center mt-5">
+	  <%= link_to '会員登録はこちら', new_public_customer_registration_path, class: "btn btn-outline-secondary" %>
+	</div>
+  </div>
+</div>

@@ -6,11 +6,13 @@
     <%= csp_meta_tag %>
     <script src="https://kit.fontawesome.com/7223783fbe.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css" type="text/css" media="all" />
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <div id="wrapper">
     <header>
       <% if public_customer_signed_in? %>
         <%= render 'layouts/header_customer' %>
@@ -23,5 +25,30 @@
       <% end %>
     </header>
     <%= yield %>
+      <footer class="footer mt-auto py-3 bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center pt-3">
+            <p>Copyright © 2020 MyDogs All Rights Reserved.</p>
+          </div>
+          <div class="col-md-4 offset-4 text-center ">
+            S N S
+          </div>
+          <div class="col-md-4 offset-4 text-center mb-3">
+            <a href="https://twitter.com/home">
+              <i class="fab fa-twitter-square fa-2x faa-shake animated-hover"></i>
+            </a>
+            <a href="https://www.instagram.com/?hl=ja">
+              <i class="fab fa-instagram-square fa-2x faa-shake animated-hover"></i>
+            </a>
+            <a href="https://ja-jp.facebook.com/">
+              <i class="fab fa-facebook-square fa-2x faa-shake animated-hover"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
   </body>
 </html>
+

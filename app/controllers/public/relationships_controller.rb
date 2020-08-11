@@ -1,22 +1,25 @@
 class Public::RelationshipsController < ApplicationController
+  before_action :authenticate_public_customer!, only: [:create, :destroy]
   before_action :set_side, only: [:followers, :follows]
   def create
     customer = current_public_customer
-    dog = Dog.find(params[:dog_id])
-    if dog.customer.id == customer.id
+    @dog = Dog.find(params[:dog_id])
+    if @dog.customer.id == customer.id
       redirect_back(fallback_location: public_root_path)
     else
-      Relationship.find_or_create_by(customer_id: customer.id, dog_id: dog.id)
-      redirect_back(fallback_location: public_root_path)
+      Relationship.find_or_create_by(customer_id: customer.id, dog_id: @dog.id)
+      # redirect_back(fallback_location: public_root_path)
+      render 'relationship'
     end
   end
 
   def destroy
     customer = current_public_customer
-    dog = Dog.find(params[:dog_id])
-    relationship = Relationship.find_by(customer_id: current_public_customer.id, dog_id: dog.id)
+    @dog = Dog.find(params[:dog_id])
+    relationship = Relationship.find_by(customer_id: current_public_customer.id, dog_id: @dog.id)
     relationship.destroy if relationship
-    redirect_back(fallback_location: public_root_path)
+    # redirect_back(fallback_location: public_root_path)
+    render 'relationship'
   end
 
   def followers
@@ -40,6 +43,7 @@ class Public::RelationshipsController < ApplicationController
   end
 
   private
+
   # サイド用データ取得
   def set_side
     @new_posts = Post.order(created_at: :desc).limit(9)
