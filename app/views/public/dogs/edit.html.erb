@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>ペットの編集</h1>
+  <h2>ペットの編集</h2>
     <%= form_for @dog, url: public_dog_path(@dog) do |f| %>
     <%= render 'layouts/error_messages', model: f.object %>
     <div class="form-group row">
@@ -53,6 +53,7 @@
     <div class="form-group row">
       <div class="col-md-3">
     	  <%= f.label :cover_image, 'ペットのカバー写真' %>
+        <p>(詳細ページのカバー画像に適用)</p>
       </div>
       <div class="col-md-9">
       	<% if @dog.cover_image.present? %>
@@ -67,6 +68,7 @@
     <div class="form-group row">
       <div class="col-md-3">
     	  <%= f.label :profile_image, 'ペットのプロフィール写真' %>
+        <p>(アイコン画像に適用)</p>
       </div>
       <div class="col-md-9">
       	<% if @dog.profile_image.present? %>

@@ -16,7 +16,8 @@
         <%= f.label :image, '写真' %>
       </div>
       <div class="col-md-3">
- 	    <%= f.file_field :image %>
+          <%= image_tag @post.image.url, id: :img_prev10 %><br>
+ 	    <%= f.file_field :image, id: :customer_img10 %>
  	  </div>
 	</div>
 	<% else %>
@@ -33,7 +34,8 @@
 	  <div class="col-md-3">
         <%= f.label :tag_list, 'タグ' %>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
+        <p>(複数の場合は,区切りで入力してください)</p>
 		<%= f.text_field :tag_list, value: @post.tag_list.join(','),class: 'form-control' %>
       </div>
 	</div>

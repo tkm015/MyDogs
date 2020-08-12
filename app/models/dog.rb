@@ -12,6 +12,9 @@ class Dog < ApplicationRecord
     validates :sex
     validates :introduction
   end
+
+  validates :name, length: { maximum: 15 }
+  validates :introduction, length: { maximum: 100 }
   # 画像投稿機能
   mount_uploader :cover_image, CoverImageUploader
   mount_uploader :profile_image, ProfileImageUploader

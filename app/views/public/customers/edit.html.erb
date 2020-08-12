@@ -1,5 +1,5 @@
 <div class="container mt-5 mb-3">
-  <h1>会員情報編集</h1>
+  <h2>会員情報編集</h2>
     <%= form_for @customer, url: public_customer_path do |f| %>
     <%= render 'layouts/error_messages', model: f.object %>
       <div class="form-group row">
@@ -37,6 +37,7 @@
       <div class="form-group row">
         <div class="col-md-3">
           <%= f.label :cover_image, 'カバー画像' %>
+          <p>(詳細ページのカバー画像に適用)</p>
         </div>
         <div class="col-md-3">
           <% if @customer.cover_image.present? %>
@@ -50,6 +51,7 @@
       <div class="form-group row">
         <div class="col-md-3">
           <%= f.label :profile_image, 'プロフィール画像' %>
+          <p>(アイコン画像に適用)</p>
         </div>
         <div class="col-md-3">
           <% if @customer.profile_image.present? %>

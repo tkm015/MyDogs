@@ -141,3 +141,33 @@
     });
   });
 
+  $(function() {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+    $('#img_prev9').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#customer_img9').change(function(){
+        readURL(this);
+    });
+  });
+
+  $(function() {
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+    $('#img_prev10').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#customer_img10').change(function(){
+        readURL(this);
+    });
+  });
+

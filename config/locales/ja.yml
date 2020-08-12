@@ -48,6 +48,13 @@ ja:
         title: タイトル
         text: 本文
         video_or_image: 写真か動画
+      dog:
+        name: 名前
+        cover_image: カバー画像
+        profile_image: プロフィール画像
+        dog_breed: 犬種
+        sex: 性別
+        introduction: 紹介文
     errors:
       models:
         customer:
@@ -58,6 +65,8 @@ ja:
               blank: "を入力してください。"
             name:
               blank: "を入力してください。"
+            introduction:
+              too_long: "は100文字以内で入力してください。"
         post:
           attributes:
             dog:
@@ -67,8 +76,26 @@ ja:
               too_long: "は30文字以内で入力してください。"
             text:
               blank: "を入力してください。"
-              too_long: "は文字以内で入力してください。"
+              too_long: "は200文字以内で入力してください。"
             video_or_image:
               blank: "を選択してください。"
+        dog:
+          attributes:
+            name:
+              blank: "を入力してください。"
+              too_long: "は15文字以内で入力してください。"
+            cover_image:
+              blank: "を選択してください。"
+            profile_image:
+              blank: "を選択してください。"
+            sex:
+              blank: "を選択してください。"
+            dog_breed:
+              blank: "を選択してください。"
+              required: "を選択してください。"
+            introduction:
+              blank: "を入力してください。"
+              too_long: "は100文字以内で入力してください。"
+
 
 
