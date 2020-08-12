@@ -1,6 +1,6 @@
 <div class="container">
   <h2>犬種登録</h2>
-  全<%= @dog_breeds.count %>種登録
+  全<%= @dog_breed_count.count %>種登録
   <div class="form-group form-inline ">
     <%= form_for @dog_breed, url: admin_dog_breeds_path do |f| %>
       <%= f.text_field :name,class: 'form-control'  %>

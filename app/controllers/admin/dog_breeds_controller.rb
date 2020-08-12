@@ -3,6 +3,7 @@ class Admin::DogBreedsController < ApplicationController
   def index
     @dog_breed = DogBreed.new
     @dog_breeds = DogBreed.page(params[:page]).order('created_at DESC').per(10)
+    @dog_breed_count = DogBreed.all
   end
 
   def create
