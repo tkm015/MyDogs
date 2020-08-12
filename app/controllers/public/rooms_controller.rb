@@ -21,7 +21,7 @@ class Public::RoomsController < ApplicationController
       @message = Message.new
       @entries = @room.entries
     else
-      redirect_back(fallback_location: public_root_path)
+      redirect_back(fallback_location: public_top_path)
     end
   end
 

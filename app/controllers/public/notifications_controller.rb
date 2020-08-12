@@ -9,6 +9,6 @@ class Public::NotificationsController < ApplicationController
     @notifications.each do |notification|
       notification.update_attributes(checked: true)
     end
-    redirect_back(fallback_location: public_root_path)
+    redirect_back(fallback_location: public_top_path)
   end
 end

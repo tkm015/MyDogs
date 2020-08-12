@@ -50,8 +50,7 @@ class Public::CustomersController < ApplicationController
   def hide
     @customer.update(is_active: "退会")
     reset_session
-    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
-    redirect_to public_root_path
+    redirect_to public_top_path
   end
 
   def about

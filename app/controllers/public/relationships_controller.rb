@@ -5,10 +5,9 @@ class Public::RelationshipsController < ApplicationController
     customer = current_public_customer
     @dog = Dog.find(params[:dog_id])
     if @dog.customer.id == customer.id
-      redirect_back(fallback_location: public_root_path)
+      redirect_back(fallback_location: public_top_path)
     else
       Relationship.find_or_create_by(customer_id: customer.id, dog_id: @dog.id)
-      # redirect_back(fallback_location: public_root_path)
       render 'relationship'
     end
   end
@@ -18,7 +17,6 @@ class Public::RelationshipsController < ApplicationController
     @dog = Dog.find(params[:dog_id])
     relationship = Relationship.find_by(customer_id: current_public_customer.id, dog_id: @dog.id)
     relationship.destroy if relationship
-    # redirect_back(fallback_location: public_root_path)
     render 'relationship'
   end
 

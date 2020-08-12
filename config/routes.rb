@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'public/customers#about'
   namespace :public do
     devise_for :customers
-    root 'customers#top'
+    get '/top', to: 'customers#top', as: "top"
     resources :customers, only: [:show, :edit, :update]
     put '/customers/:id/hide', to: 'customers#hide', as: 'destroy'
     resources :rooms, only: [:create, :show]

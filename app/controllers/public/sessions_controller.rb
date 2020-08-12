@@ -20,12 +20,12 @@ class Public::SessionsController < Devise::SessionsController
 
   # ログイン後遷移ページ
   def after_sign_in_path_for(resource)
-    public_root_path
+    public_top_path
   end
 
   # ログアウト後遷移ページ
   def after_sign_out_path_for(resource)
-    public_root_path
+    public_top_path
   end
 
   protected
