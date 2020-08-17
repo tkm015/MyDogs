@@ -1,5 +1,6 @@
 <div class="container-fluid">
    <div class="top_back_image">
+     <%= render 'layouts/notifications'%>
    	  <h1 id="top_title">Most popular dog</h1>
    	    <%= link_to public_dog_path(@dog) do %>
           <%= image_tag @dog.profile_image.top.url,class: 'top_popular_dog_image' %>

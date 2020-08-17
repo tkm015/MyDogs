@@ -57,12 +57,24 @@
         <p>(詳細ページのカバー画像に適用)</p>
       </div>
       <div class="col-md-9">
-    	  <% if @dog.cover_image.present? %>
-          <%= image_tag @dog.cover_image.url, id: :img_prev5 %><br>
-        <% else %>
-          <%= image_tag 'noimage.jpg', id: :img_prev5 %><br>
-        <% end %>
+        <%= image_tag @dog.cover_image.url, id: :img_prev5 %><br>
         <%= f.file_field :cover_image, id: :customer_img5 %>
+        <script type="text/javascript">
+          $(function() {
+            function readURL(input) {
+              if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function (e) {
+          $('#img_prev5').attr('src', e.target.result);
+              }
+              reader.readAsDataURL(input.files[0]);
+              }
+          }
+          $('#customer_img5').change(function(){
+              readURL(this);
+          });
+        });
+        </script>
       </div>
     </div>
     <div class="form-group row">
@@ -71,12 +83,24 @@
         <p>(アイコン画像に適用)</p>
       </div>
       <div class="col-md-9">
-    	  <% if @dog.profile_image.present? %>
-          <%= image_tag @dog.profile_image.url, id: :img_prev6 %><br>
-        <% else %>
-          <%= image_tag 'noimage.jpg', id: :img_prev6 %><br>
-        <% end %>
+        <%= image_tag @dog.profile_image.url, id: :img_prev6 %><br>
         <%= f.file_field :profile_image, id: :customer_img6 %>
+        <script type="text/javascript">
+          $(function() {
+            function readURL(input) {
+              if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function (e) {
+          $('#img_prev6').attr('src', e.target.result);
+              }
+              reader.readAsDataURL(input.files[0]);
+              }
+          }
+          $('#customer_img6').change(function(){
+              readURL(this);
+          });
+        });
+        </script>
       </div>
     </div>
 	  <%= f.submit '登録',class: 'btn btn-outline-dark' %>

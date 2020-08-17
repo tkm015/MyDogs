@@ -4,6 +4,7 @@ class Public::CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = current_public_customer.comments.new(comment_params)
     @comment.post_id = @post.id
+    @comment.score = Language.get_data(comment_params[:comment])
     if @comment.save
       @post.save_notification_comment!(current_public_customer, @comment.id, @post.customer_id)
     end
