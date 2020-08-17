@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_02_093714) do
+ActiveRecord::Schema.define(version: 2020_08_17_104619) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2020_08_02_093714) do
     t.string "comment", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "score", precision: 5, scale: 3
     t.index ["customer_id"], name: "index_comments_on_customer_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
